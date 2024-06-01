@@ -64,13 +64,14 @@ resource "aws_s3_bucket_notification" "bn" {
 	depends_on = [var.lf_permission]
 }
 
+/*
 resource "aws_s3_bucket_policy" "s3-policy" {
   bucket     = aws_s3_bucket.b1.id
   policy     = var.policy_for_cf
   depends_on = [var.cf_name]
 }
 
-/*
+
 resource "aws_s3_directory_bucket" "db" {
   count = var.directory_bucket ? 1 : 0
   bucket = "${var.bucket_name}--usw2-az1--x-s3"
