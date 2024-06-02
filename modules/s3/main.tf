@@ -52,6 +52,7 @@ resource "aws_s3_bucket_ownership_controls" "s1" {
   }
 }
 
+/*
 resource "aws_s3_bucket_notification" "bn" {
 	count = var.trigger_lambda == true ? 1 : 0
   bucket = aws_s3_bucket.b1.id
