@@ -2,7 +2,7 @@ module "s3" {
   source = "./modules/s3"
 
 # >>>Lambda portion
- 	trigger_lambda = true
+# 	trigger_lambda = true
   lf_arn          = module.lambda.lf_arn
   lf_permission  = module.lambda.lf_permission
 # >>>CloudFront portion
