@@ -87,7 +87,7 @@ variable "enable_acl" {
 
 variable "trigger_lambda" {
 	type = bool
-
+	default = false
 	description = "Trigger Lambda function or not"
 }
 
