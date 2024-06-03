@@ -16,11 +16,13 @@ variable "runtime_lang" {
 	description = "Type and version of the runtime language"
 }
 
+/*
 variable "bucket_arn" {
 	type = string
 	default = ""
 	description = "Arn of s3 bucket"
 }
+*/
 
 variable "func_name" {
 	type = string
