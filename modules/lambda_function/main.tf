@@ -59,6 +59,7 @@ resource "aws_lambda_function" "tf-lambda-up" {
   runtime = var.runtime_lang
 }
 
+/*ver
 resource "aws_lambda_permission" "alp" {
   statement_id = "AllowExecutionFromS3"
   action = "lambda:InvokeFunction"
@@ -66,3 +67,4 @@ resource "aws_lambda_permission" "alp" {
   principal = "s3.amazonaws.com"
   source_arn = var.bucket_arn
 }
+*/
