@@ -60,7 +60,6 @@ resource "aws_s3_bucket_notification" "bn" {
 	depends_on = [var.lf_permission]
 }
 
-/*
 resource "aws_s3_bucket_policy" "s3-policy" {
   bucket     = aws_s3_bucket.b1.id
   policy     = var.policy_for_cf
