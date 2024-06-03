@@ -18,6 +18,7 @@ variable "runtime_lang" {
 
 variable "bucket_arn" {
 	type = string
+	default = ""
 	description = "Arn of s3 bucket"
 }
 
