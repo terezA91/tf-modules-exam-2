@@ -1,10 +1,5 @@
 //There is a problem here
 
-provider "aws" {
-	region = "eu-north-1" 
-	profile = "default"
-}
-
 resource "aws_iam_role" "for-lambda-t" {
 	name = "role-for-lambda"
 

@@ -1,8 +1,3 @@
-provider "aws" {
-	region = "eu-north-1"
-	profile = "default"
-}
-
 resource "aws_s3_bucket" "b1" {
 	#count = var.directory_bucket ? 0 : 1
 	bucket = var.bucket_name
