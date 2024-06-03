@@ -56,7 +56,7 @@ data "archive_file" "zip-of-content" {
 }
 
 resource "aws_lambda_function" "tf-lambda-up" {
-  function_name = "tf-lambda"
+  function_name = var.func_name
   filename = "${path.module}/${var.source_dir}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
   #ver handler = "${local.file_name}.lambda_handler"

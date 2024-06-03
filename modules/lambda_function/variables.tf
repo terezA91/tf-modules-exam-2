@@ -20,3 +20,8 @@ variable "bucket_arn" {
 	type = string
 	description = "Arn of s3 bucket"
 }
+
+variable "func_name" {
+	type = string
+	default = "lf-alp"
+}
