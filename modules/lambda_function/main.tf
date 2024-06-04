@@ -64,7 +64,7 @@ resource "aws_lambda_permission" "alp" {
   statement_id = "AllowExecutionFromS3"
   action = "lambda:InvokeFunction"
   function_name = aws_lambda_function.tf-lambda-up.arn
-  principal = "s3.amazonaws.com"
+  principal = var.principal
   source_arn = var.bucket_arn
 }
 */
