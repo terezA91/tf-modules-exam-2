@@ -9,3 +9,8 @@ variable "enable_lf" {
 	default = false
 }
 */
+
+variable "bucket_name" {
+	type = string
+	default = "some-bucket"
+}
