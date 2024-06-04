@@ -5,7 +5,7 @@ variable "principal" {
 
 variable "enable_lf" {
 	type = bool
-	default = true
+	default = false
 	description = "Create a lambda function or not"
 }
 
