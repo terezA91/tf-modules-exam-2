@@ -37,13 +37,13 @@ variable "directory_bucket" {
 
 variable "object_source" {
   type = string
-	default = "../../source_objects/cat.jpg"
+	default = "../../source_objects/index.html"
   description = "Source path of the s3 bucket object"
 }
 
 variable "object_name" {
   type = string
-  default = "cat.jpg"
+  default = "index.html"
   description = "User-defined object name of the bucket"
 }
 
@@ -76,7 +76,7 @@ variable "enable_versioning" {
 variable "as_website" {
 	type = bool
 	description = "Create a bucket as a website(default) or as a storage"
-	default = false
+	default = true
 }
 
 variable "accelerate" {
