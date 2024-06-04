@@ -1,6 +1,6 @@
 module "s3" {
   source = "./modules/s3"
-  count = var.create_s3 == true ? 1 : 0
+  count = var.enable_s3 == true ? 1 : 0
 # >>>Lambda portion
  	#trigger_lambda = true
   #lf_arn          = module.lambda.lf_arn
@@ -13,6 +13,6 @@ module "s3" {
 
 module "lambda" {
   source = "./modules/lambda_function"
-
+  count = var.enable_lf == true ? 1 : 0
   //bucket_arn = module.s3.bucket_arn
 }
