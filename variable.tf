@@ -1,4 +1,4 @@
-
+/*
 variable "enable_s3" {
 	type = bool
 	default = true
@@ -13,4 +13,4 @@ variable "bucket_name" {
 	type = string
 	default = "some-bucket"
 }
-
+*/
