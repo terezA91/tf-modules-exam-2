@@ -1,6 +1,7 @@
 module "s3" {
   source = "./modules/s3"
   enable_s3 = var.enable_s3
+  count = enable_s3 == true ? 1 : 0
   //count = var.enable_s3 ? 1 : 0
 
 # >>>Lambda portion
