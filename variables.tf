@@ -1,6 +1,6 @@
 variable "enable_s3" {
 	type = bool
-	default = true
+	default = false
 	description = "initialize s3 module or not"
 }
 
@@ -115,4 +115,3 @@ variable "policy_for_cf" {
 	default = ""
 	description = "s3 bucket policy for cloudfront"
 }
-
