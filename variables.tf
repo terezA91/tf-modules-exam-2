@@ -7,7 +7,7 @@ variable "enable_s3" {
 variable "bucket_name" {
 	type = string
 	description = "Name of the s3 bucket"
-	default = "bucket-alp"
+	default = "bucket-alp2"
 }
 
 variable "bucket_prefix" {
