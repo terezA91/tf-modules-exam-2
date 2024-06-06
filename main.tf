@@ -1,6 +1,7 @@
 module "s3" {
   source = "./modules/s3"
   enable_s3 = var.enable_s3
+  bucket_name = var.bucket_name
   count = var.enable_s3 ? 1 : 0
   //count = var.enable_s3 ? 1 : 0
 
