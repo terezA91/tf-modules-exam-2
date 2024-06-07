@@ -49,7 +49,7 @@ resource "aws_launch_template" "alt" {
     resource_type = "instance"
 
     tags = {
-    Name = local.launch_template_ec2_name
+    Name = "Some-name"
     }
   }
 
