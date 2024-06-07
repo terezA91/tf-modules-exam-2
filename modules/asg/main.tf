@@ -30,7 +30,7 @@ resource "aws_launch_template" "alt" {
 	description = "Custom launch template"
 	image_id = data.aws_ami.ubuntu.id
 	instance_type = var.instance_type
-	vps_security_group_ids = [var.sec_group_id]
+	vpc_security_group_ids = [var.sec_group_id]
 	key_name = aws_key_pair.key.key_name
 	disable_api_stop = var.disable_api_stop  //dv
 	disable_api_termination = var.disable_termination  //dv
