@@ -1,3 +1,8 @@
+provider "aws" {
+  region = "eu-north-1"
+  profile = "default"
+}
+
 module "vpc" {
   source = "./modules/vpc"
 }
