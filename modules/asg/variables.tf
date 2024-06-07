@@ -21,7 +21,7 @@ variable "lt_name" {
 }
 
 variable "instance_type" {
-	default = "t2.micro"
+	default = "t3.micro"
 	description = "instance_type of AWS EC2"
 }
 
