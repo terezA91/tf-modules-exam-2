@@ -6,7 +6,6 @@ resource "aws_autoscaling_group" "asg" {
 	health_check_type = "EC2"
 	force_delete = false
 	vpc_zone_identifier = [var.pub_sub_a_id, var.pub_sub_b_id]
-	placement_group = aws_placement_group.p_group.id
 	
 	launch_template {
 		id = aws_launch_template.alt.id
@@ -77,10 +76,4 @@ resource "local_file" "key_file"{
   content = tls_private_key.key_gen.private_key_pem
   filename = var.key_file
 }
-
-resource "aws_placement_group" "p_group" {
-	name = var.pg_name
-	strategy = var.pg_strategy[0]
-}
-
 
