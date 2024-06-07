@@ -22,6 +22,7 @@ resource "aws_subnet" "pub-sub-b" {
   }
 }
 
+/*
 resource "aws_subnet" "priv-sub-a" {
   vpc_id = aws_vpc.vpc.id
   cidr_block = var.priv_sub_cidr[0]
@@ -41,3 +42,4 @@ resource "aws_subnet" "priv-sub-b" {
     Name = "Private Subnet - 2"
   }
 }
+*/

@@ -11,6 +11,7 @@ resource "aws_route_table" "public" {
 	}
 }
 
+/*
 resource "aws_route_table" "private" {
   vpc_id = aws_vpc.vpc.id
 
@@ -23,6 +24,7 @@ resource "aws_route_table" "private" {
     Name = "Route table for private"
   }
 }
+*/
 
 resource "aws_route_table_association" "public-a" {
 	subnet_id = aws_subnet.pub-sub-a.id
@@ -34,7 +36,7 @@ resource "aws_route_table_association" "public-b" {
   route_table_id = aws_route_table.public.id
 }
 
-
+/*
 resource "aws_route_table_association" "private-a" {
 	subnet_id = aws_subnet.priv-sub-a.id
 	route_table_id = aws_route_table.private.id
@@ -44,3 +46,4 @@ resource "aws_route_table_association" "private-b" {
   subnet_id = aws_subnet.priv-sub-b.id
   route_table_id = aws_route_table.private.id
 }
+*/
