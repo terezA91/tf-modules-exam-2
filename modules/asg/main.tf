@@ -56,6 +56,26 @@ resource "aws_launch_template" "alt" {
 	user_data = filebase64("${path.module}/${var.user_data}")
 }
 
+resource "aws_lb" "alb" {
+  name               = "my-alb"
+  internal           = false
+  load_balancer_type = "application"
+  security_groups    = [var.sec_group_id]
+  subnets            = [var.pub_sub_a_id, var.pub_sub_b_id]
+}
+
+resource "aws_lb_target_group" "target_group" {
+  name     = "my-target-group"
+  port     = 80
+  protocol = "HTTP"
+  vpc_id   = var.vpc_id
+
+  health_check {
+    path    = "/"
+    matcher = 200
+  }
+}
+
 data "aws_ami" "ubuntu" {
 	owners = ["099720109477"] 
 	most_recent = true

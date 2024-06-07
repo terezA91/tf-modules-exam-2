@@ -1,5 +1,9 @@
 //Default type of variables is <string>
 
+variable "vpc_id" {
+	type = any
+}
+
 variable "pg_name" {
 	default = "test_pg"
 	description = "Name for placement_group of instances"
@@ -43,7 +47,6 @@ variable "key_file" {
 
 variable "sec_group_id" {
 	type = any
-	default = ""
 	description = "Security group id"
 }
 
@@ -75,8 +78,8 @@ variable "pub_sub_a_id" {
 }
 
 variable "pub_sub_b_id" {
-	type = any
-  	description = "Id of second Public Subnet"
+  type = any
+  description = "Id of second Public Subnet"
 }
 
 variable "propagate_asg_tag" {
