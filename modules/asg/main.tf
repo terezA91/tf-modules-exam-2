@@ -76,6 +76,17 @@ resource "aws_lb_target_group" "target_group" {
   }
 }
 
+resource "aws_lb_listener" "alb_listener" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.target_group.arn
+  }
+}
+
 data "aws_ami" "ubuntu" {
 	owners = ["099720109477"] 
 	most_recent = true
