@@ -1,15 +1,15 @@
 resource "aws_autoscaling_group" "asg" {
 	name = "My Autoscaling Group"
 	min_size = 1
-	max_size = 1
+	max_size = 3
 	desired_capacity = 1
 	//health_check_type = "EC2"
-	force_delete = false
+	//force_delete = false
 	vpc_zone_identifier = [var.pub_sub_a_id, var.pub_sub_b_id]
 	
 	launch_template {
 		id = aws_launch_template.alt.id
-		version = aws_launch_template.alt.latest_version  //or "$Latest"
+		version = "$Latest"   //or aws_launch_template.alt.latest_version
 	}
 /*
 	instance_maintenance_policy {
