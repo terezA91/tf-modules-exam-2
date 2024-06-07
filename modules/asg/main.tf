@@ -1,7 +1,7 @@
 resource "aws_autoscaling_group" "asg" {
 	name = "My Autoscaling Group"
 	min_size = 1
-	max_size = 2
+	max_size = 1
 	desired_capacity = 1
 	health_check_type = "EC2"
 	force_delete = false
@@ -11,12 +11,12 @@ resource "aws_autoscaling_group" "asg" {
 		id = aws_launch_template.alt.id
 		version = aws_launch_template.alt.latest_version  //or "$Latest"
 	}
-
+/*
 	instance_maintenance_policy {
 		min_healthy_percentage = 90
 		max_healthy_percentage = 110
 	}
-
+*/
 	tag {
 		key = "Name"
 		value = "My first AS_Group"
