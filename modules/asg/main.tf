@@ -1,8 +1,8 @@
 resource "aws_autoscaling_group" "asg" {
 	name = "My Autoscaling Group"
-	min_size = 1
-	max_size = 3
-	desired_capacity = 1
+	min_size = 2
+	max_size = 5
+	desired_capacity = 3
 	//health_check_type = "EC2"
 	//force_delete = false
 	vpc_zone_identifier = [var.pub_sub_a_id, var.pub_sub_b_id]
@@ -31,6 +31,7 @@ resource "aws_launch_template" "alt" {
 	instance_type = var.instance_type
 	vpc_security_group_ids = [var.sec_group_id]
 	key_name = aws_key_pair.key.key_name
+/*
 	disable_api_stop = var.disable_api_stop  //dv
 	disable_api_termination = var.disable_termination  //dv
 	update_default_version = var.update_lt_version
@@ -42,6 +43,15 @@ resource "aws_launch_template" "alt" {
 	monitoring {
 		enabled = false
 	}
+*/
+
+	tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+    Name = local.launch_template_ec2_name
+    }
+  }
 
 	user_data = filebase64("${path.module}/${var.user_data}")
 }
