@@ -9,9 +9,9 @@ module "autoscaling_group" {
 
   enable_autoscaling = var.enable_autoscaling
   count = var.enable_autoscaling ? 1 : 0
-  sec_group_id = module.vpc.sec_group_id
-  pub_sub_a_id = module.vpc.pub_sub_a_id
-  pub_sub_b_id = module.vpc.pub_sub_b_id
+  sec_group_id = module.vpc[0].sec_group_id
+  pub_sub_a_id = module.vpc[0].pub_sub_a_id
+  pub_sub_b_id = module.vpc[0].pub_sub_b_id
   user_data = "../../source_objects/docker_install.sh"
 }
 
@@ -28,8 +28,8 @@ module "s3" {
   #lf_arn          = module.lambda.lf_arn
   #lf_permission  = module.lambda.lf_permission
 # >>>CloudFront portion
- cf_name       = module.cloudfront.cf_name
- policy_for_cf = module.cloudfront.policy_for_cf
+ cf_name       = module.cloudfront[0].cf_name
+ policy_for_cf = module.cloudfront[0].policy_for_cf
 }
 
 module "cloudfront" {
@@ -37,10 +37,10 @@ module "cloudfront" {
 
 	enable_cloudfront = var.enable_cloudfront
 	count = var.enable_cloudfront ? 1 : 0
-	s3_bucket_name     = module.s3.s3_bucket_name
+	s3_bucket_name     = module.s3[0].s3_bucket_name
   origin_domain_name = module.s3[0].domain_name
-  origin_id          = module.s3.origin_id
-  s3_bucket_arn      = module.s3.bucket_arn
+  origin_id          = module.s3[0].origin_id
+  s3_bucket_arn      = module.s3[0].bucket_arn
 }
 
 /*
