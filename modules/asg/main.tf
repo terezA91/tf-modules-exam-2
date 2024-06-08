@@ -38,6 +38,9 @@ resource "aws_launch_template" "alt" {
 	
 	network_interfaces {
 		associate_public_ip_address = var.associate_pub_ip
+		security_groups = [var.sec_group_id]
+		subnet_id = var.pub_sub_a_id
+		delete_on_termination = var.delete_net_interface
 	}
 
 	hibernation_options {

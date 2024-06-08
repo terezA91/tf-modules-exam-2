@@ -10,6 +10,12 @@ variable "associate_pub_ip" {
 	description = "Associate public id_address to instance or not"
 }
 
+variable "delete_net_interface" {
+	type = bool
+	default = true
+	description = "Delete network interface on instance termination or not"
+}
+
 variable "pg_name" {
 	default = "test_pg"
 	description = "Name for placement_group of instances"
