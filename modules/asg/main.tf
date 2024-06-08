@@ -3,21 +3,20 @@ resource "aws_autoscaling_group" "asg" {
 	min_size = 2
 	max_size = 5
 	desired_capacity = 3
-	health_check_type = "ELB"
-	//force_delete = false
-	target_group_arns = [aws_lb_target_group.target_group.arn]
+	health_check_type = "EC2"
+	force_delete = false
 	vpc_zone_identifier = [var.pub_sub_a_id, var.pub_sub_b_id]
 	
 	launch_template {
 		id = aws_launch_template.alt.id
 		version = "$Latest"   //or aws_launch_template.alt.latest_version
 	}
-/*
+
 	instance_maintenance_policy {
 		min_healthy_percentage = 90
 		max_healthy_percentage = 110
 	}
-*/
+
 	tag {
 		key = "Name"
 		value = "My first AS_Group"
@@ -32,7 +31,7 @@ resource "aws_launch_template" "alt" {
 	instance_type = var.instance_type
 	vpc_security_group_ids = [var.sec_group_id]
 	key_name = aws_key_pair.key.key_name
-/*
+
 	disable_api_stop = var.disable_api_stop  //dv
 	disable_api_termination = var.disable_termination  //dv
 	update_default_version = var.update_lt_version
@@ -44,7 +43,6 @@ resource "aws_launch_template" "alt" {
 	monitoring {
 		enabled = false
 	}
-*/
 
 	tag_specifications {
     resource_type = "instance"
@@ -55,37 +53,6 @@ resource "aws_launch_template" "alt" {
   }
 
 	user_data = filebase64("${path.module}/${var.user_data}")
-}
-
-resource "aws_lb" "alb" {
-  name               = "my-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [var.sec_group_id]
-  subnets            = [var.pub_sub_a_id, var.pub_sub_b_id]
-}
-
-resource "aws_lb_target_group" "target_group" {
-  name     = "my-target-group"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
-
-  health_check {
-    path    = "/"
-    matcher = 200
-  }
-}
-
-resource "aws_lb_listener" "alb_listener" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.target_group.arn
-  }
 }
 
 data "aws_ami" "ubuntu" {
