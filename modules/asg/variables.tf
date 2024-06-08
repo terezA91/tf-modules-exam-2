@@ -4,6 +4,12 @@ variable "vpc_id" {
 	type = any
 }
 
+variable "associate_pub_ip" {
+	type = bool
+	default = true
+	description = "Associate public id_address to instance or not"
+}
+
 variable "pg_name" {
 	default = "test_pg"
 	description = "Name for placement_group of instances"

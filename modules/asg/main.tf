@@ -36,6 +36,10 @@ resource "aws_launch_template" "alt" {
 	disable_api_termination = var.disable_termination  //dv
 	update_default_version = var.update_lt_version
 	
+	network_interfaces {
+		associate_public_ip_address = var.associate_pub_ip
+	}
+
 	hibernation_options {
 		configured = false
 	}
