@@ -29,7 +29,7 @@ module "s3" {
   #lf_permission  = module.lambda.lf_permission
 # >>>CloudFront portion
  cf_name       = module.cloudfront[0].cf_name
- policy_for_cf = module.cloudfront.policy_for_cf
+ policy_for_cf = module.cloudfront[0].policy_for_cf
 }
 
 module "cloudfront" {
