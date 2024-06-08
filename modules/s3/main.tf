@@ -47,6 +47,12 @@ resource "aws_s3_bucket_ownership_controls" "s1" {
   }
 }
 
+resource "aws_s3_bucket_policy" "s3-policy" {
+  bucket     = aws_s3_bucket.b1.id
+  policy     = var.policy_for_cf
+  depends_on = [var.cf_name]
+}
+
 /*
 resource "aws_s3_bucket_notification" "bn" {
 	count = var.trigger_lambda == true ? 1 : 0
@@ -59,13 +65,6 @@ resource "aws_s3_bucket_notification" "bn" {
 	
 	depends_on = [var.lf_permission]
 }
-
-resource "aws_s3_bucket_policy" "s3-policy" {
-  bucket     = aws_s3_bucket.b1.id
-  policy     = var.policy_for_cf
-  depends_on = [var.cf_name]
-}
-
 
 resource "aws_s3_directory_bucket" "db" {
   count = var.directory_bucket ? 1 : 0

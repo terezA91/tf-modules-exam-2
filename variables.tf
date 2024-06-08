@@ -1,3 +1,7 @@
+variable "region" {
+	default = ""
+}
+
 variable "enable_autoscaling" {
 	type = bool
 	default = false
@@ -6,7 +10,11 @@ variable "enable_autoscaling" {
 variable "enable_s3" {
 	type = bool
 	default = false
-	description = "initialize s3 module or not"
+}
+
+variable "enable_vpc" {
+	type = bool
+	default = false
 }
 
 variable "bucket_name" {
