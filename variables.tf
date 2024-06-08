@@ -2,6 +2,11 @@ variable "region" {
 	default = ""
 }
 
+variable "enable_cloudfront" {
+	type = bool
+	default = false
+}
+
 variable "enable_autoscaling" {
 	type = bool
 	default = false

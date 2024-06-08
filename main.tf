@@ -1,6 +1,6 @@
 module "vpc" {
   source = "./modules/vpc"
-	count = enable_vpc ? 1 : 0
+	count = var.enable_vpc ? 1 : 0
 }
 
 module "autoscaling_group" {
@@ -27,8 +27,8 @@ module "s3" {
   #lf_arn          = module.lambda.lf_arn
   #lf_permission  = module.lambda.lf_permission
 # >>>CloudFront portion
- cf_name       = module.cf_distribution.cf_name
- policy_for_cf = module.cf_distribution.policy_for_cf
+ cf_name       = module.cloudfront.cf_name
+ policy_for_cf = module.cloudfront.policy_for_cf
 }
 
 module "cloudfront" {
