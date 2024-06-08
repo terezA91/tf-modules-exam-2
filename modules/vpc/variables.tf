@@ -1,6 +1,6 @@
 #Vpc variables
 
-variable "ebanle_vpc" {
+variable "enable_vpc" {
 	type = bool
 	default = false
 }
