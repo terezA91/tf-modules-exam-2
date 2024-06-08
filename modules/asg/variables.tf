@@ -131,7 +131,7 @@ variable "ami_name" {
 }
 
 variable "ami_virtualization_type" {
-	defalt = "hvm"
+	default = "hvm"
 }
 
 /*
