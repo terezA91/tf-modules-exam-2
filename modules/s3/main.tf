@@ -13,7 +13,7 @@ resource "aws_s3_object" "ob" {
   bucket = aws_s3_bucket.b1.bucket
   source = "${path.module}/${var.object_source}"
   key = var.object_name
-	content_type = var.as_website == true ? "text/html" : "image/jpeg"
+	content_type = var.as_website ? "text/html" : "image/jpeg"
 	server_side_encryption = "AES256"
 }
 
