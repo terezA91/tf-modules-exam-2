@@ -1,10 +1,10 @@
 resource "aws_autoscaling_group" "asg" {
 	name = "My Autoscaling Group"
-	min_size = 1
-	max_size = 1
-	desired_capacity = 1
-	health_check_type = "EC2"
-	force_delete = false
+	min_size = var.min_size
+	max_size = var.max_size
+	desired_capacity = var.desired_capacity
+	health_check_type = var.health_check_type[0]
+	force_delete = var.asg_force_delete
 	vpc_zone_identifier = [var.pub_sub_a_id, var.pub_sub_b_id]
 	
 	launch_template {
@@ -13,8 +13,8 @@ resource "aws_autoscaling_group" "asg" {
 	}
 
 	instance_maintenance_policy {
-		min_healthy_percentage = 90
-		max_healthy_percentage = 110
+		min_healthy_percentage = var.min_healthy_percentage
+		max_healthy_percentage = var.max_healthy_percentage
 	}
 
 	tag {
@@ -29,6 +29,7 @@ resource "aws_launch_template" "alt" {
 	description = "Custom launch template"
 	image_id = data.aws_ami.ubuntu.id
 	instance_type = var.instance_type
+	//Conflict with <security_groups> attribute of <network_interfaces>
 	//vpc_security_group_ids = [var.sec_group_id]
 	key_name = aws_key_pair.key.key_name
 
@@ -44,11 +45,11 @@ resource "aws_launch_template" "alt" {
 	}
 
 	hibernation_options {
-		configured = false
+		configured = var.enable_hibernation
 	}
 
 	monitoring {
-		enabled = false
+		enabled = var.enable_monitoring
 	}
 
 	tag_specifications {
@@ -64,16 +65,16 @@ resource "aws_launch_template" "alt" {
 
 data "aws_ami" "ubuntu" {
 	owners = ["099720109477"] 
-	most_recent = true
+	most_recent = var.ami_most_recent
 
 	filter {
 		name = "name"
-		values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+		values = [var.ami_name]
 	}
 
 	filter {
 		name = "virtualization-type"
-		values = ["hvm"]
+		values = [var.ami_virtualization_type]
 	}
 }
 
