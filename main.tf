@@ -9,7 +9,8 @@ module "vpc" {
 
 module "autoscaling_group" {
   source = "./modules/asg"
-  vpc_id = module.vpc.vpc_id
+  enable_autoscaling = var.enable_autoscaling
+  count = var.enable_autoscaling ? 1 : 0
   sec_group_id = module.vpc.sec_group_id
   pub_sub_a_id = module.vpc.pub_sub_a_id
   pub_sub_b_id = module.vpc.pub_sub_b_id

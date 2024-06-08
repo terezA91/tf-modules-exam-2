@@ -93,4 +93,3 @@ resource "local_file" "key_file"{
   content = tls_private_key.key_gen.private_key_pem
   filename = var.key_file
 }
-

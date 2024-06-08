@@ -1,6 +1,6 @@
 //Default type of variables is <string>
 
-variable "enable_autoscaling_module" {
+variable "enable_autoscaling" {
 	type = bool
 	default = false
 }
