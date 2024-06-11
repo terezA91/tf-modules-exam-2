@@ -1,5 +1,5 @@
 variable "region" {
-	default = ""
+	default = "eu-north-1"
 }
 
 variable "enable_alb" {
