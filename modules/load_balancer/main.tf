@@ -56,7 +56,7 @@ resource "aws_autoscaling_policy" "asg_policy" {
 	policy_type = "TargetTrackingScaling"
 	autoscaling_group_name = aws_autoscaling_group.asg.name
 
-	//estimated_instance_warmup = 300
+	estimated_instance_warmup = 300
 
 	target_tracking_configuration {
 		predefined_metric_specification {
