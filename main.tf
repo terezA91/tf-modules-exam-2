@@ -9,11 +9,11 @@ module "app_lb" {
 
 	enable_alb = var.enable_alb
 	count = var.enable_alb ? 1 : 0
-	vpc_id = module.vpc.vpc_id
-	ec2_sec_group_id = module.vpc.ec2_sec_group
-	alb_sec_group_id = module.vpc.alb_sec_group
-	pub_sub_a_id = module.vpc.pub_sub_a_id
-	pub_sub_b_id = module.vpc.pub_sub_b_id
+	vpc_id = module.vpc[0].vpc_id
+	ec2_sec_group_id = module[0].vpc.ec2_sec_group
+	alb_sec_group_id = module.vpc[0].alb_sec_group
+	pub_sub_a_id = module.vpc[0].pub_sub_a_id
+	pub_sub_b_id = module.vpc[0].pub_sub_b_id
 	user_data = "../../source_objects/ip_addr.html"
 }
 
