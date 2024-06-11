@@ -8,7 +8,7 @@ variable "ec2_sec_group_id" { type = any }
 
 variable "alb_sec_group_id" { type = any }
 
-variable "vpc_id" {}
+variable "vpc_id" { type = any }
 
 variable "ami_most_recent" {
 	type = bool

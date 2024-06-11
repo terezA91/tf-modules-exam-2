@@ -42,7 +42,7 @@ resource "aws_autoscaling_group" "asg" {
 	mixed_instances_policy {
 		launch_template {
 			launch_template_specification {
-				launch_template_id = aws_launch_templet.lt.id
+				launch_template_id = aws_launch_template.lt.id
 			}
 			override {
 				instance_type = "t3.micro"

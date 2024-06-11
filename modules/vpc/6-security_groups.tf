@@ -1,11 +1,11 @@
 resource "aws_security_group" "for_ec2" {
   name = "ec2_sg"
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.vpc.id
 }
 
 resource "aws_security_group" "for_alb" {
   name = "alb_sg"
-  vpc_id = var.vpc_id
+  vpc_id = aws_vpc.vpc.id
 }
 
 //Security_group_rules for ec2 instance
