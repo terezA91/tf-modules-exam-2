@@ -8,6 +8,7 @@ module "app_lb" {
 	source = "./modules/load_balancer"
 
 	enable_alb = var.enable_alb
+	count = var.enable_alb ? 1 : 0
 	vpc_id = module.vpc.vpc_id
 	ec2_sec_group_id = module.vpc.ec2_sec_group
 	alb_sec_group_id = module.vpc.alb_sec_group

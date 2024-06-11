@@ -30,7 +30,7 @@ resource "aws_sutoscaling_group" "asg" {
 	min_size = 1
 	max_size = 2
 	desired_capacity = 1
-	healt_check_type = "EC2"
+	health_check_type = "EC2"
 
 	vpc_zone_identifier = [
 		var.pub_sub_a_id,
@@ -77,7 +77,7 @@ resource "aws_lb" "alb" {
 	]
 }
 
-resource "alb_listener" "listener" {
+resource "aws_alb_listener" "listener" {
 	load_balancer_arn = aws_lb.alb.arn
 	port = "80"
 	protocol = "HTTP"
