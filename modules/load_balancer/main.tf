@@ -4,7 +4,7 @@ resource "aws_launch_template" "lt" {
 	image_id               = "ami-07309549f34230bcd" 
   key_name               = aws_key_pair.key.key_name
   vpc_security_group_ids = [var.ec2_sec_group_id]
-	user_data = filebase64("user_data.sh")
+	user_data = filebase64("${path.module}/user_data.sh")
 }
 
 resource "aws_lb_target_group" "alb_tg" {
