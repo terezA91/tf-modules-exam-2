@@ -10,7 +10,7 @@ resource "aws_security_group" "for_alb" {
 
 //Security_group_rules for ec2 instance
 resource "aws_security_group_rule" "ec2_ingress_1" {
-  descrition = "Allow incoming traffic in ec2"
+  description = "Allow incoming traffic in ec2"
   type = "ingress"
   from_port = 8080
   to_port = 8080
