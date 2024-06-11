@@ -1,10 +1,10 @@
 resource "aws_launch_template" "lt" {
   name                   = "my-launch-template"
-  image_id               = data.aws_ami.ubuntu.id
+  //image_id             = data.aws_ami.ubuntu.id
+	image_id               = "ami-07309549f34230bcd" 
   key_name               = aws_key_pair.key.key_name
   vpc_security_group_ids = [var.ec2_sec_group_id]
-
-	user_data = filebase64("${path.module}/${var.user_data}")
+	user_data = filebase64("user_data.sh")
 }
 
 resource "aws_lb_target_group" "alb_tg" {
@@ -29,12 +29,12 @@ resource "aws_autoscaling_group" "asg" {
 	name = "my-asg"
 	min_size = 1
 	max_size = 2
-	desired_capacity = 1
+	//desired_capacity = 1
 	health_check_type = "EC2"
 
 	vpc_zone_identifier = [
-		var.pub_sub_a_id,
-		var. pub_sub_b_id
+		var.priv_sub_a_id,
+		var.priv_sub_b_id
 	]
 	
 	target_group_arns = [aws_lb_target_group.alb_tg.arn]
@@ -62,7 +62,7 @@ resource "aws_autoscaling_policy" "asg_policy" {
 		predefined_metric_specification {
 			predefined_metric_type = "ASGAverageCPUUtilization"	
 		}
-		target_value = 35.0
+		target_value = 25.0
 	}
 }
 
