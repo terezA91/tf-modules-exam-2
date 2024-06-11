@@ -4,6 +4,17 @@ module "vpc" {
 	count = var.enable_vpc ? 1 : 0
 }
 
+module "app_lb" {
+	source = "./modules/load_balancer"
+
+	enable_alb = var.enable_alb
+	vpc_id = module.vpc.vpc_id
+	ec2_sec_group_id = module.vpc.ec2_sec_group
+	alb_sec_group_id = module.vpc.alb_sec_group
+	pub_sub_a_id = module.vpc.pub_sub_a_id
+	pub_sub_b_id = module.vpc.pub_sub_b_id
+}
+
 module "autoscaling_group" {
   source = "./modules/autoscaling"
 
@@ -24,12 +35,12 @@ module "s3" {
   count = var.enable_s3 ? 1 : 0
 
 # >>>Lambda portion
- 	#trigger_lambda = true
+	#trigger_lambda = var.trigger_lambda
   #lf_arn          = module.lambda.lf_arn
   #lf_permission  = module.lambda.lf_permission
 # >>>CloudFront portion
- cf_name       = module.cloudfront[0].cf_name
- policy_for_cf = module.cloudfront[0].policy_for_cf
+  #cf_name       = module.cloudfront[0].cf_name
+  #policy_for_cf = module.cloudfront[0].policy_for_cf
 }
 
 module "cloudfront" {
