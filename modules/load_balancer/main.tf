@@ -8,7 +8,7 @@ resource "aws_launch_template" "lt" {
 }
 
 resource "aws_lb_target_group" "alb_tg" {
-  name = "my-alb_tg"
+  name = "my-alb-tg"
   port = 8080
   protocol = "HTTP"
   vpc_id = var.vpc_id
@@ -25,7 +25,7 @@ resource "aws_lb_target_group" "alb_tg" {
   }
 }
 
-resource "aws_sutoscaling_group" "asg" {
+resource "aws_autoscaling_group" "asg" {
 	name = "my-asg"
 	min_size = 1
 	max_size = 2

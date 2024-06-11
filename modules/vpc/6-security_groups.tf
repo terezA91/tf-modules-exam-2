@@ -1,11 +1,11 @@
 resource "aws_security_group" "for_ec2" {
   name = "ec2_sg"
-  vpc_id = aws_vpc.exam.id
+  vpc_id = var.vpc_id
 }
 
 resource "aws_security_group" "for_alb" {
   name = "alb_sg"
-  vpc_id = aws_vpc.exam.id
+  vpc_id = var.vpc_id
 }
 
 //Security_group_rules for ec2 instance
@@ -79,7 +79,7 @@ resource "aws_security_group_rule" "alb_egress_2" {
   source_security_group_id = aws_security_group.for_ec2.id
 }
 
-/*
+
 resource "aws_security_group" "tf-sg" {
 	name = "Custom sg"
 	description = "sg-for-public-instance"
@@ -120,4 +120,4 @@ resource "aws_security_group" "tf-sg" {
 		Name = "My security_group"
 	}
 }
-*/
+
