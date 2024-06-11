@@ -1,7 +1,7 @@
 resource "aws_launch_template" "lt" {
   name                   = "my-launch-template"
   //image_id             = data.aws_ami.ubuntu.id
-	image_id               = "ami-07309549f34230bcd" 
+	image_id               = "ami-011e54f70c1c91e17" 
   key_name               = aws_key_pair.key.key_name
   vpc_security_group_ids = [var.ec2_sec_group_id]
 	user_data = filebase64("${path.module}/user_data.sh")
