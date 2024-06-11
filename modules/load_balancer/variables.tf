@@ -45,6 +45,10 @@ variable "key_file" {
   description = "File for storing private key"
 }
 
+variable "user_data" {
+  description = "Path of user_data script"
+}
+
 variable "pub_sub_a_id" {
   type = any
   description = "Id of first Public Subnet"

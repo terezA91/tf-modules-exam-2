@@ -3,6 +3,8 @@ resource "aws_launch_template" "lt" {
   image_id               = data.aws_ami.ubuntu.id
   key_name               = aws_key_pair.key.key_name
   vpc_security_group_ids = [var.ec2_sec_group_id]
+
+	user_data = filebase64("${path.module}/${var.user_data}")
 }
 
 resource "aws_lb_target_group" "alb_tg" {

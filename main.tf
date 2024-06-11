@@ -13,6 +13,7 @@ module "app_lb" {
 	alb_sec_group_id = module.vpc.alb_sec_group
 	pub_sub_a_id = module.vpc.pub_sub_a_id
 	pub_sub_b_id = module.vpc.pub_sub_b_id
+	user_data = "../../source_objects/ip_addr.html"
 }
 
 module "autoscaling_group" {
