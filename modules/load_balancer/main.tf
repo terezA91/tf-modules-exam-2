@@ -20,8 +20,8 @@ resource "aws_lb_target_group" "alb_tg" {
     protocol = "HTTP"
     path = "/"
     matcher = "200"
-    healthy_threshold = 2
-    unhealthy_threshold = 2
+    healthy_threshold = 3
+    unhealthy_threshold = 3
   }
 }
 
@@ -77,7 +77,7 @@ resource "aws_lb" "alb" {
 	]
 }
 
-resource "aws_alb_listener" "listener" {
+resource "aws_lb_listener" "listener" {
 	load_balancer_arn = aws_lb.alb.arn
 	port = "80"
 	protocol = "HTTP"
