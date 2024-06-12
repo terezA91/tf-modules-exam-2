@@ -1,7 +1,8 @@
 resource "aws_launch_template" "lt" {
   name                   = "my-launch-template"
   //image_id             = data.aws_ami.ubuntu.id
-	image_id               = "ami-011e54f70c1c91e17" 
+	//image_id               = "ami-011e54f70c1c91e17" 
+	image_id               = "ami-019d2d2e8d2649a28" 
   key_name               = aws_key_pair.key.key_name
   vpc_security_group_ids = [var.ec2_sec_group_id]
 	user_data = filebase64("${path.module}/user_data.sh")
@@ -20,8 +21,8 @@ resource "aws_lb_target_group" "alb_tg" {
     protocol = "HTTP"
     path = "/"
     matcher = "200"
-    healthy_threshold = 3
-    unhealthy_threshold = 3
+    healthy_threshold = 2
+    unhealthy_threshold = 2
   }
 }
 
@@ -29,7 +30,7 @@ resource "aws_autoscaling_group" "asg" {
 	name = "my-asg"
 	min_size = 1
 	max_size = 2
-	//desired_capacity = 1
+	desired_capacity = 1
 	health_check_type = "EC2"
 
 	vpc_zone_identifier = [
