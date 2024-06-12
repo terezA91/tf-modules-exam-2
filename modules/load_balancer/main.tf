@@ -33,8 +33,8 @@ resource "aws_autoscaling_group" "asg" {
 	health_check_type = "EC2"
 
 	vpc_zone_identifier = [
-		var.priv_sub_a_id,
-		var.priv_sub_b_id
+		var.pub_sub_a_id,
+		var.pub_sub_b_id
 	]
 	
 	target_group_arns = [aws_lb_target_group.alb_tg.arn]
