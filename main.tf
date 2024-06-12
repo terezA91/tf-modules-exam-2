@@ -14,8 +14,8 @@ module "app_lb" {
 	alb_sec_group_id = module.vpc[0].alb_sec_group
 	pub_sub_a_id = module.vpc[0].pub_sub_a_id
 	pub_sub_b_id = module.vpc[0].pub_sub_b_id
-	priv_sub_a_id = module.vpc[0].priv_sub_a_id
-	priv_sub_b_id = module.vpc[0].priv_sub_b_id
+	//priv_sub_a_id = module.vpc[0].priv_sub_a_id
+	//priv_sub_b_id = module.vpc[0].priv_sub_b_id
 	user_data = "../../source_objects/ip_addr.html"
 }
 

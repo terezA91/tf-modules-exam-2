@@ -58,7 +58,7 @@ variable "pub_sub_b_id" {
   type = any
   description = "Id of second Public Subnet"
 }
-
+/*
 variable "priv_sub_a_id" {
   type = any
   description = "Id of first Private Subnet"
@@ -68,3 +68,4 @@ variable "priv_sub_b_id" {
   type = any
   description = "Id of second Private Subnet"
 }
+*/
