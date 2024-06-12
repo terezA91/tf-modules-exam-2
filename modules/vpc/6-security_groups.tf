@@ -22,8 +22,8 @@ resource "aws_security_group_rule" "ec2_ingress_1" {
 resource "aws_security_group_rule" "ec2_ingress_2" {
   description = "For health checks"
   type = "ingress"
-  from_port = 8081
-  to_port = 8081
+  from_port = 8080
+  to_port = 8080
   protocol = "tcp"
   security_group_id = aws_security_group.for_ec2.id
   source_security_group_id = aws_security_group.for_alb.id
@@ -72,8 +72,8 @@ resource "aws_security_group_rule" "alb_egress_1" {
 resource "aws_security_group_rule" "alb_egress_2" {
   description = "For alb health_checks result"
   type = "egress"
-  from_port = 8081
-  to_port = 8081
+  from_port = 8080
+  to_port = 8080
   protocol = "tcp"
   security_group_id = aws_security_group.for_alb.id
   source_security_group_id = aws_security_group.for_ec2.id
