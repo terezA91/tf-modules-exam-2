@@ -16,7 +16,7 @@ resource "aws_lb_target_group" "alb_tg" {
 
   health_check {
     enabled = true
-    port = 8081
+    port = 8080
     interval = 30
     protocol = "HTTP"
     path = "/"
