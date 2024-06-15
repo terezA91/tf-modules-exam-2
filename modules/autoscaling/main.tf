@@ -82,7 +82,7 @@ data "aws_ami" "custom_ami" {
 
 	filter {
 		name = "name"
-		value = [var.ami_source]
+		values = [var.ami_source]
 	}
 
 	filter {
