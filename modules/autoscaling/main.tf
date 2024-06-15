@@ -50,7 +50,7 @@ resource "aws_launch_template" "lt" {
 	network_interfaces {
     associate_public_ip_address = var.associate_pub_ip
     security_groups = [var.instance_sec_group]
-    subnet_id = var.pub_sub_a_id
+    subnet_id = var.pub_sub_a
     delete_on_termination = var.delete_net_interface
   }
 
