@@ -33,7 +33,7 @@ resource "aws_launch_template" "lt" {
   instance_type = var.instance_type
   key_name = aws_key_pair.key.key_name
   //security_groups = [var.instance_sec_group]
-	filebase64("${path.module}/file.sh")
+	user_data =	filebase64("${path.module}/file.sh")
 /*
   user_data = <<-EOF
                 #!/bin/bash
