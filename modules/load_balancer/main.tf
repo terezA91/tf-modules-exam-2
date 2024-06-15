@@ -1,123 +1,79 @@
-resource "aws_launch_template" "lt" {
-  name                   = "my-launch-template"
-  //image_id             = data.aws_ami.ubuntu.id
-	//image_id               = "ami-011e54f70c1c91e17" 
-	image_id               = "ami-019d2d2e8d2649a28" 
-  key_name               = aws_key_pair.key.key_name
-  vpc_security_group_ids = [var.ec2_sec_group_id]
-	user_data = filebase64("${path.module}/user_data.sh")
-}
+#AWS ELB config
+resource "aws_elb" "alb" {
+  name = "Custom-alb"
+  subnets = [var.pub_sub_a, var.pub_sub_b]
+  security_groups = [aws_security_group.alb_sg.id]
 
-resource "aws_lb_target_group" "alb_tg" {
-  name = "my-alb-tg"
-  port = 8080
-  protocol = "HTTP"
-  vpc_id = var.vpc_id
+  listener {
+    instance_port = 80
+    instance_protocol = "http"
+    lb_port = 80
+    lb_protocol = "http"
+  }
 
   health_check {
-    enabled = true
-    port = 8080
-    interval = 30
-    protocol = "HTTP"
-    path = "/"
-    matcher = "200"
     healthy_threshold = 2
     unhealthy_threshold = 2
+    timeout = 3
+    target = "HTTP:80/"
+    interval = 30
+  }
+
+  cross_zone_load_balancing = true
+  connection_draining = true
+  connection_draining_timeout = 400
+
+  tags = {
+    Name = "Custom-alb"
   }
 }
 
-resource "aws_autoscaling_group" "asg" {
-	name = "my-asg"
-	min_size = 1
-	max_size = 2
-	desired_capacity = 1
-	health_check_type = "EC2"
+#security group for AWS ELB
+resource "aws_security_group" "alb_sg" {
+	name = "ELB-SecurityGroup"
+  description = "Security group for ELB"
+  vpc_id = var.vpc
 
-	vpc_zone_identifier = [
-		var.pub_sub_a_id,
-		var.pub_sub_b_id
-	]
-	
-	target_group_arns = [aws_lb_target_group.alb_tg.arn]
-
-	mixed_instances_policy {
-		launch_template {
-			launch_template_specification {
-				launch_template_id = aws_launch_template.lt.id
-			}
-			override {
-				instance_type = "t3.micro"
-			}
-		}
-	}
-}
-
-resource "aws_autoscaling_policy" "asg_policy" {
-	name = "my-asg-policy"
-	policy_type = "TargetTrackingScaling"
-	autoscaling_group_name = aws_autoscaling_group.asg.name
-
-	estimated_instance_warmup = 300
-
-	target_tracking_configuration {
-		predefined_metric_specification {
-			predefined_metric_type = "ASGAverageCPUUtilization"	
-		}
-		target_value = 25.0
-	}
-}
-
-resource "aws_lb" "alb" {
-	name = "my-alb"
-	internal = false
-	load_balancer_type = "application"
-	security_groups = [var.alb_sec_group_id]
-	subnets = [
-		var.pub_sub_a_id,
-		var.pub_sub_b_id
-	]
-}
-
-resource "aws_lb_listener" "listener" {
-	load_balancer_arn = aws_lb.alb.arn
-	port = "80"
-	protocol = "HTTP"
-
-	default_action {
-		type = "forward"
-		target_group_arn = aws_lb_target_group.alb_tg.arn
-	}
-}
-
-
-
-data "aws_ami" "ubuntu" {
-  owners = ["099720109477"]
-  most_recent = var.ami_most_recent
-
-  filter {
-    name = "name"
-    values = [var.ami_name]
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
-  filter {
-    name = "virtualization-type"
-    values = [var.ami_virtualization_type]
+	egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "Custom-ELB-SecurityGroup"
   }
 }
 
-//The following 3 resources are intended for key generation(and store)
-resource "tls_private_key" "key_gen" {
-  algorithm = var.key_algorithm
-  rsa_bits = var.rsa_bits
-}
+#security group for instances
+resource "aws_security_group" "instance_sg" {
+	name = "Instance-SecurityGroup"
+  description = "Security group for Instances"
+  vpc_id = var.vpc
 
-resource "aws_key_pair" "key" {
-  key_name = var.key_name
-  public_key = tls_private_key.key_gen.public_key_openssh
-}
+  ingress {
+    from_port = 22
+    to_port = 80
+    protocol = "tcp"
+    security_groups = [aws_security_group.alb_sg.id]
+  }
 
-resource "local_file" "key_file"{
-  content = tls_private_key.key_gen.private_key_pem
-  filename = var.key_file
+	egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "Custom-Instance-SecurityGroup"
+  }
 }

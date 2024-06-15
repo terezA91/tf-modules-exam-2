@@ -9,14 +9,11 @@ module "app_lb" {
 
 	enable_alb = var.enable_alb
 	count = var.enable_alb ? 1 : 0
-	vpc_id = module.vpc[0].vpc_id
-	ec2_sec_group_id = module.vpc[0].ec2_sec_group
-	alb_sec_group_id = module.vpc[0].alb_sec_group
-	pub_sub_a_id = module.vpc[0].pub_sub_a_id
-	pub_sub_b_id = module.vpc[0].pub_sub_b_id
+	vpc = module.vpc[0].vpc_id
+	pub_sub_a = module.vpc[0].pub_sub_a_id
+	pub_sub_b = module.vpc[0].pub_sub_b_id
 	//priv_sub_a_id = module.vpc[0].priv_sub_a_id
 	//priv_sub_b_id = module.vpc[0].priv_sub_b_id
-	user_data = "../../source_objects/ip_addr.html"
 }
 
 module "autoscaling_group" {
@@ -24,10 +21,10 @@ module "autoscaling_group" {
 
   enable_autoscaling = var.enable_autoscaling
   count = var.enable_autoscaling ? 1 : 0
-  sec_group_id = module.vpc[0].sec_group_id
-  pub_sub_a_id = module.vpc[0].pub_sub_a_id
-  pub_sub_b_id = module.vpc[0].pub_sub_b_id
-  user_data = "../../source_objects/docker_install.sh"
+	pub_sub_a = module.vpc[0].pub_sub_a_id
+	pub_sub_b = module.vpc[0].pub_sub_b_id
+	elb = module.app_lb[0].elb
+	instance_sec_group = module.app_lb[0].instance_sec_group
 }
 
 

@@ -8,7 +8,7 @@ variable "ec2_sec_group_id" { type = any }
 
 variable "alb_sec_group_id" { type = any }
 
-variable "vpc_id" { type = any }
+variable "vpc" { type = any }
 
 variable "ami_most_recent" {
 	type = bool
@@ -49,22 +49,22 @@ variable "user_data" {
   description = "Path of user_data script"
 }
 
-variable "pub_sub_a_id" {
+variable "pub_sub_a" {
   type = any
   description = "Id of first Public Subnet"
 }
 
-variable "pub_sub_b_id" {
+variable "pub_sub_b" {
   type = any
   description = "Id of second Public Subnet"
 }
 /*
-variable "priv_sub_a_id" {
+variable "priv_sub_a" {
   type = any
   description = "Id of first Private Subnet"
 }
 
-variable "priv_sub_b_id" {
+variable "priv_sub_b" {
   type = any
   description = "Id of second Private Subnet"
 }

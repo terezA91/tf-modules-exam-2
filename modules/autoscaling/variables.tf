@@ -1,4 +1,8 @@
 //Default type of variables is <string>
+variable "instance_sec_group" {
+	type = any
+	default = ""
+}
 
 variable "enable_autoscaling" {
 	type = bool
@@ -31,6 +35,16 @@ variable "health_check_type" {
 variable "asg_force_delete" {
 	type = bool
 	default = true
+}
+
+variable "grace_period" {
+	type = number
+	default = 100
+	description = "health-check grace period"
+}
+
+variable "elb" {
+	type = any
 }
 
 variable "pub_sub_a_id" {
@@ -120,14 +134,19 @@ variable "user_data" {
   description = "Path of user_data script"
 }
 
+variable "ami_owner" {
+	default = "637423489195"
+	description  = "Account_id of ami owner"
+}
+
 variable "ami_most_recent" {
 	type = bool
 	default = true
 }
 
-variable "ami_name" {
+variable "ami_source" {
 	type = any
-	default = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+	default = "637423489195/my_ami"
 }
 
 variable "ami_virtualization_type" {
@@ -161,3 +180,16 @@ variable "key_file" {
 	description = "File for storing private key"
 }
 
+variable "enable_cpu_out_alarm" {
+	type = bool
+	default = false  //dv-?
+}
+
+variable "enable_cpu_in_alarm" {
+  type = bool
+  default = false  //dv-?
+}
+
+variable "instance_type" {
+	default = "t3.micro"
+}
