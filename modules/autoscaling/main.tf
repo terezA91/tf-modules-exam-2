@@ -135,7 +135,7 @@ resource "aws_cloudwatch_metric_alarm" "cpu_alarm_scaleup" {
   }
 
   actions_enabled = true
-  alarm_actions = [aws_autoscaling_policy.scaleout_policy.arn]
+  alarm_actions = [aws_autoscaling_policy.scaleout_policy[0].arn]
 }
 
 #define auto descaling policy
@@ -166,5 +166,5 @@ resource "aws_cloudwatch_metric_alarm" "cpu-alarm-scaledown" {
   }
 
   actions_enabled = true
-  alarm_actions = [aws_autoscaling_policy.scalein_policy.arn]
+  alarm_actions = [aws_autoscaling_policy.scalein_policy[0].arn]
 }
