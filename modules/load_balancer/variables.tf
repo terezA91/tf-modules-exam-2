@@ -4,10 +4,6 @@ variable "enable_alb" {
 	description = "Initialize <load_balancer> module"
 }
 
-variable "ec2_sec_group_id" { type = any }
-
-variable "alb_sec_group_id" { type = any }
-
 variable "vpc" { type = any }
 
 variable "ami_most_recent" {
@@ -43,10 +39,6 @@ variable "key_name" {
 variable "key_file" {
   default = "key.pem"
   description = "File for storing private key"
-}
-
-variable "user_data" {
-  description = "Path of user_data script"
 }
 
 variable "pub_sub_a" {

@@ -130,9 +130,11 @@ variable "enable_monitoring" {
   description = "Enable monitoring for instances or not"
 }
 
+/*
 variable "user_data" {
   description = "Path of user_data script"
 }
+*/
 
 variable "ami_owner" {
 	default = "637423489195"
