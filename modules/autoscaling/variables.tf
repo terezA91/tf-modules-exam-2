@@ -47,12 +47,12 @@ variable "elb" {
 	type = any
 }
 
-variable "pub_sub_a_id" {
+variable "pub_sub_a" {
   type = any
   description = "Id of first Public Subnet"
 }
 
-variable "pub_sub_b_id" {
+variable "pub_sub_b" {
   type = any
   description = "Id of second Public Subnet"
 }
@@ -105,11 +105,6 @@ variable "associate_pub_ip" {
   type = bool
   default = true
   description = "Associate public id_address to instance or not"
-}
-
-variable "sec_group_id" {
-  type = any
-  description = "Security group id"
 }
 
 variable "delete_net_interface" {
