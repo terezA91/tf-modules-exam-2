@@ -1,3 +1,4 @@
+/*
 resource "aws_security_group" "for_ec2" {
   name = "ec2_sg"
   vpc_id = aws_vpc.vpc.id
@@ -120,4 +121,4 @@ resource "aws_security_group" "tf-sg" {
 		Name = "My security_group"
 	}
 }
-
+*/

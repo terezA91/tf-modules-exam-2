@@ -33,7 +33,8 @@ resource "aws_launch_template" "lt" {
   instance_type = var.instance_type
   key_name = aws_key_pair.key.key_name
   //security_groups = [var.instance_sec_group]
-
+	filebase64("${path.module}/file.sh")
+/*
   user_data = <<-EOF
                 #!/bin/bash
                 sudo apt update
@@ -42,6 +43,7 @@ resource "aws_launch_template" "lt" {
                 sudo systemctlenable apache2
                 echo “Hello from $(hostname -f).Created by USERDATA in Terraform. > /var/www/html/index.html
               EOF
+*/
 
 	disable_api_stop = var.disable_api_stop  //dv
   disable_api_termination = var.disable_termination  //dv
