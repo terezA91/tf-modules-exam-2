@@ -79,7 +79,7 @@ resource "aws_launch_template" "lt" {
 data "aws_ami" "custom_ami" {
 	owners = [var.ami_owner]
 	most_recent = var.ami_most_recent
-
+/*
 	filter {
 		name = "name"
 		values = [var.ami_source]
@@ -89,6 +89,7 @@ data "aws_ami" "custom_ami" {
 		name = "virtualization-type"
 		values = [var.ami_virtualization_type]
 	}
+*/
 }
 
 //The following 3 resources are intended for key generation(and store)
