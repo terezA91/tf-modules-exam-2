@@ -17,13 +17,13 @@ variable "min_size" {
 
 variable "max_size" {
   type = number
-  default = 1
+  default = 3
   description = "Maximum size of Autoscaling group"
 }
 
 variable "desired_capacity" {
 	type = number
-	default = 1
+	default = 2
 	description = "Desired capacity of Autoscaling group"
 }
 
