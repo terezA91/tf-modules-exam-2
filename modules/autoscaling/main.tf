@@ -32,18 +32,7 @@ resource "aws_launch_template" "lt" {
   image_id = data.aws_ami.custom_ami.id
   instance_type = var.instance_type
   key_name = aws_key_pair.key.key_name
-  //security_groups = [var.instance_sec_group]
 	user_data =	filebase64("${path.module}/file.sh")
-/*
-  user_data = <<-EOF
-                #!/bin/bash
-                sudo apt update
-                sudo apt install -y apache2
-                sudo systemctl start apache2
-                sudo systemctlenable apache2
-                echo “Hello from $(hostname -f).Created by USERDATA in Terraform. > /var/www/html/index.html
-              EOF
-*/
 
 	disable_api_stop = var.disable_api_stop  //dv
   disable_api_termination = var.disable_termination  //dv
@@ -52,12 +41,8 @@ resource "aws_launch_template" "lt" {
 	network_interfaces {
     associate_public_ip_address = var.associate_pub_ip
     security_groups = [var.instance_sec_group]
-    subnet_id = var.pub_sub_a
+    subnet_id = var.pub_sub_a //problem
     delete_on_termination = var.delete_net_interface
-  }
-
-  lifecycle {
-    create_before_destroy = true
   }
 
 	hibernation_options {
@@ -72,7 +57,7 @@ resource "aws_launch_template" "lt" {
     resource_type = "instance"
 
     tags = {
-    Name = "Custom-launch-template"
+    	Name = "Custom-launch-template"
     }
   }
 }
