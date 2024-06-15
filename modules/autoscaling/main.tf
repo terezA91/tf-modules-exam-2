@@ -91,7 +91,7 @@ data "aws_ami" "custom_ami" {
 	}
 }
 
-/The following 3 resources are intended for key generation(and store)
+//The following 3 resources are intended for key generation(and store)
 resource "tls_private_key" "key_gen" {
   algorithm = var.key_algorithm
   rsa_bits = var.rsa_bits

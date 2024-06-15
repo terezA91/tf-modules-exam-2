@@ -190,6 +190,3 @@ variable "enable_cpu_in_alarm" {
   default = false  //dv-?
 }
 
-variable "instance_type" {
-	default = "t3.micro"
-}
