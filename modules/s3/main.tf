@@ -64,7 +64,7 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
         ]
         */
         Resource = [
-					"arn:aws:s3:::${var.bucket_name}"
+					"arn:aws:s3:::${var.bucket_name}",
 					"arn:aws:s3:::${var.bucket_name}/*"
 				]
       }
