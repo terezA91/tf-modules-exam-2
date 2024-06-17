@@ -58,7 +58,7 @@ module "cloudfront" {
   s3_bucket_arn      = module.s3[0].bucket_arn
 }
 
-/*
+
 module "lambda" {
   source = "./modules/lambda_function"
   //count = enable_lf == true ? 1 : 0
@@ -66,4 +66,3 @@ module "lambda" {
   //bucket_arn = module.s3.bucket_arn
 }
 
-*/
