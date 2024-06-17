@@ -10,8 +10,7 @@ variable "enable_lf" {
 }
 
 variable "source_dir" {
-	type = string
-	default = "../../python"
+	default = ""
 	description = "Source directory of target file containing Lambda function"
 }
 
