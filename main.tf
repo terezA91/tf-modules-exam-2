@@ -43,10 +43,8 @@ module "s3" {
   lf_arn          = var.trigger_lambda ? module.lambda[0].lf_arn : ""
   lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : ""
 # >>>CloudFront portion
-  cf_name       = 
-		var.enable_cloudfront ? module.cloudfront[0].cf_name : ""
-  policy_for_cf = 
-		var.enable_cloudfront ? module.cloudfront[0].policy_for_cf : ""
+  cf_name       = var.enable_cloudfront ? module.cloudfront[0].cf_name : ""
+  policy_for_cf = var.enable_cloudfront ? module.cloudfront[0].policy_for_cf : ""
 }
 
 module "cloudfront" {
