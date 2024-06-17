@@ -36,6 +36,7 @@ variable "s3_object_path" {
 }
 
 variable "object_name" {
+	default = "s3-object"
   description = "User-defined object name of the bucket"
 }
 
