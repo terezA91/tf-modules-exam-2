@@ -32,9 +32,11 @@ module "s3" {
   source = "./modules/s3"
 
   enable_s3 = var.enable_s3
-  bucket_name = var.bucket_name
   count = var.enable_s3 ? 1 : 0
-
+  bucket_name = var.bucket_name
+	s3_object_path = var.s3_object_path
+	content_type = var.content_type
+	
 # >>>Lambda portion
 	#trigger_lambda = var.trigger_lambda
   #lf_arn          = module.lambda.lf_arn
