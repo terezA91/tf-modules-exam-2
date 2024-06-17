@@ -1,11 +1,11 @@
 //Provider variables
 variable "config_path" {
-  value = "~/.aws/config"
+  default = "~/.aws/config"
   description = "Path of AWS Region configuration"
 }
 
 variable "credential_path" {
-  value = "~/.aws/credentials"
+  default = "~/.aws/credentials"
   description = "Path of AWS user credentials"
 }
 
