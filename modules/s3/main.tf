@@ -47,6 +47,7 @@ resource "aws_s3_bucket_ownership_controls" "s1" {
 }
 
 resource "aws_s3_bucket_policy" "s3-policy" {
+	count      = var.with_cf ? 1 : 0
   bucket     = aws_s3_bucket.b1.id
   policy     = var.policy_for_cf
   depends_on = [var.cf_name]
