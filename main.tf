@@ -61,7 +61,8 @@ module "cloudfront" {
 
 module "lambda" {
   source = "./modules/lambda_function"
-  count = enable_lf == true ? 1 : 0
+	enable_lf = var.enable_lf
+  count = var.enable_lf == true ? 1 : 0
   //bucket_arn = module.wrapper.so == "some_val" ? sdsd : sdsd
   //bucket_arn = module.s3.bucket_arn
 }

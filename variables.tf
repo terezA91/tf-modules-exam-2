@@ -30,6 +30,11 @@ variable "enable_s3" {
 	default = false
 }
 
+variable "enable_lf" {
+	type = bool
+	default = false
+}
+
 variable "enable_vpc" {
 	type = bool
 	default = false
