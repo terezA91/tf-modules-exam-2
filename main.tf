@@ -32,7 +32,7 @@ module "s3" {
   source = "./modules/s3"
 
   enable_s3 = var.enable_s3
-	enable_cloudfront = var.enable_cloudfront
+	with_cf = var.with_cf
   count = var.enable_s3 ? 1 : 0
   bucket_name = var.bucket_name
 	s3_object_path = var.s3_object_path
@@ -43,8 +43,8 @@ module "s3" {
   lf_arn          = var.trigger_lambda ? module.lambda[0].lf_arn : ""
   lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : ""
 # >>>CloudFront portion
-  cf_name       = var.enable_cloudfront ? module.cloudfront[0].cf_name : ""
-  policy_for_cf = var.enable_cloudfront ? module.cloudfront[0].policy_for_cf : ""
+  cf_name       = var.with_cf ? module.cloudfront[0].cf_name : ""
+  policy_for_cf = var.with_cf ? module.cloudfront[0].policy_for_cf : ""
 }
 
 module "cloudfront" {

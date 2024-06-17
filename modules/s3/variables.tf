@@ -97,6 +97,12 @@ variable "ownership_type" {
   default = "BucketOwnerPreferred"
 }
 
+variable "with_cf" {
+	type = bool
+	default = false
+	description = "Integrate bucket with cloudfront or not"
+}
+
 variable "policy_for_cf" {
   type = any
   description = "s3 bucket policy for cloudfront"
