@@ -59,7 +59,7 @@ variable "sse_type" {
 
 variable "s3_block_public_acls" {
   type = bool
-  default = true
+  default = false
 }
 
 variable "s3_block_public_policy" {
@@ -69,7 +69,7 @@ variable "s3_block_public_policy" {
 
 variable "ignore_public_acls" {
   type = bool
-  default = true
+  default = false
 }
 
 variable "s3_restrict_public_buckets" {
