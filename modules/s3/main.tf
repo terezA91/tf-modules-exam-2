@@ -50,25 +50,22 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
   bucket = aws_s3_bucket.b1.id
 
   policy = jsonencode({
-    Version = "2012-10-17"
-    Id      = "MyBucketPolicy"
-    Statement = [
-      {
-        Sid       = "ReadOnlyAccess"
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = ["s3:PutObject", "s3:GetObject"]
-        /*Resource = [
-          aws_s3_bucket.b1.arn,
-          "${aws_s3_bucket.b1.arn}/*",
-        ]
-        */
-        Resource = [
-          "arn:aws:s3:::${var.bucket_name}",
+  	{
+    "Version": "2012-10-17",
+    "Id": "Policy1234567890123",
+    "Statement": [
+    	{
+      	"Sid": "Stmt1234567890123",
+        "Effect": "Allow",
+        "Principal": "*",
+        "Action": "s3:GetObject",
+        "Resource": [
+        	"arn:aws:s3:::${var.bucket_name}",
           "arn:aws:s3:::${var.bucket_name}/*"
         ]
-      }
+    	}
     ]
+		}	 
   })
 }
 
