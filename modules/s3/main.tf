@@ -32,7 +32,8 @@ resource "aws_s3_bucket" "b1" {
 resource "aws_s3_object" "ob" {
   bucket                 = aws_s3_bucket.b1.bucket
   source                 = var.s3_object_path
-  key                    = local.ct_value
+	key                    = var.object_name
+  //key                    = local.ct_value
 	//content_type           =" ${lookup(local.content_type, local.ct_value)}"
   content_type           = var.as_website ? "text/html" : var.content_type
   server_side_encryption = var.sse_type
