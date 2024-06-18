@@ -1,4 +1,10 @@
-//There is a problem here
+locals {
+	file_name = basename(var.source_path)
+	name_split = split(".", local.file_name)
+	func_handler = local.name_split[0]
+	
+}
+
 resource "aws_iam_role" "for-lambda-t" {
 	name = "role-for-lambda"
 	assume_role_policy = jsonencode({
@@ -46,10 +52,10 @@ data "archive_file" "zip-of-content" {
 }
 resource "aws_lambda_function" "tf-lambda-up" {
   function_name = var.func_name
-  filename = "${var.source_path}/file.zip"
+  filename = "${var.source_path}/${local.func_handler}.zip"
   role = aws_iam_role.for-lambda-t.arn
   #ver handler = "${local.file_name}.lambda_handler"
-  handler = "file.lambda_handler"
+  handler = "${local.func_handler}.lambda_handler"
   runtime = var.runtime_lang
 	//depends_on = [aws_cloudwatch_log_group.lf-loggroup]
 }
