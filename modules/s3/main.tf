@@ -87,7 +87,6 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
   })
 }
 
-/*
 resource "aws_s3_bucket_policy" "for_cf" {
 	count      = var.with_cf ? 1 : 0
   bucket     = aws_s3_bucket.b1.id
@@ -95,7 +94,7 @@ resource "aws_s3_bucket_policy" "for_cf" {
   depends_on = [var.cf_name]
 }
 
-
+/*
 resource "aws_s3_bucket_notification" "bn" {
 	count = var.trigger_lambda == true ? 1 : 0
   bucket = aws_s3_bucket.b1.id
