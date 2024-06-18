@@ -9,10 +9,19 @@ resource "aws_s3_bucket" "b1" {
   }
 }
 
+variable "ct" {
+	type = list(string)
+	default = split(".", var.object_name)
+}
+
+locals {
+	ct_vale = var.ct[1]
+}
+
 resource "aws_s3_object" "ob" {
   bucket                 = aws_s3_bucket.b1.bucket
   source                 = var.s3_object_path
-  key                    = var.object_name
+  key                    = local.ct_value
   content_type           = var.as_website ? "text/html" : var.content_type
   server_side_encryption = var.sse_type
 }
