@@ -62,7 +62,7 @@ module "cloudfront" {
 module "lambda" {
   source    = "./modules/lambda_function"
   enable_lf = var.enable_lf
-  count     = var.enable_lf == true ? 1 : 0
+  count     = var.enable_lf ? 1 : 0
   bucket_arn = module.s3[0].bucket_arn
 }
 
