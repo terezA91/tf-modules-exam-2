@@ -25,11 +25,11 @@ data "aws_iam_policy_document" "policy-t" {
   statement {
     actions = [
       "logs:CreateLogStream",
-      "logs:PutLogEvents"
+      "logs:PutLogEvents",
     ]
     resources = [
       aws_cloudwatch_log_group.lf-loggroup.arn,
-      "${aws_cloudwatch_log_group.lf-loggroup.arn}:*"
+      "${aws_cloudwatch_log_group.lf-loggroup.arn}:*",
     ]
   }
 }
