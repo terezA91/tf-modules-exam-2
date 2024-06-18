@@ -50,7 +50,6 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
   bucket = aws_s3_bucket.b1.id
 
   policy = jsonencode({
-  	{
     "Version": "2012-10-17",
     "Id": "Policy1234567890123",
     "Statement": [
@@ -65,7 +64,6 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
         ]
     	}
     ]
-		}	 
   })
 }
 
