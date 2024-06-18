@@ -50,7 +50,7 @@ resource "aws_lambda_function" "tf-lambda-up" {
   #ver handler = "${local.file_name}.lambda_handler"
   handler = "file.lambda_handler"
   runtime = var.runtime_lang
-	depends_on = [var.object_for_reference]
+	depends_on = [aws_cloudwatch_log_group.lf-loggroup]
 }
 
 resource "aws_lambda_permission" "alp" {
