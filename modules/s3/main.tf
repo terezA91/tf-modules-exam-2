@@ -1,18 +1,18 @@
 locals {
   ob_name_split = split(".", var.s3_object_path)
-  ct_value = local.ob_name_split[1]
+  ct_value      = local.ob_name_split[1]
 
-	content_type = {
-		html = "text/html"
-  	css = "text/css"
-  	jpeg = "image/jpeg"
-  	jpg = "image/jpeg"
-  	json = "application/json"
-  	mp4 = "video/mp4"
-  	png = "image/png"
-  	pdf = "application/pdf"
-  	xls = "application/vnd.ms-excel"
-	}
+  content_type = {
+    html = "text/html"
+    css  = "text/css"
+    jpeg = "image/jpeg"
+    jpg  = "image/jpeg"
+    json = "application/json"
+    mp4  = "video/mp4"
+    png  = "image/png"
+    pdf  = "application/pdf"
+    xls  = "application/vnd.ms-excel"
+  }
 
 }
 
@@ -28,11 +28,11 @@ resource "aws_s3_bucket" "b1" {
 }
 
 resource "aws_s3_object" "ob" {
-  bucket                 = aws_s3_bucket.b1.bucket
-  source                 = var.s3_object_path
-	//key                    = var.object_name
-  key                    = local.ct_value
-	content_type           = "${lookup(local.content_type, local.ct_value)}"
+  bucket = aws_s3_bucket.b1.bucket
+  source = var.s3_object_path
+  //key                    = var.object_name
+  key          = "${local.ct_value}-object"
+  content_type = lookup(local.content_type, local.ct_value)
   //content_type           = var.as_website ? "text/html" : var.content_type
   server_side_encryption = var.sse_type
 }
@@ -70,19 +70,19 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
   bucket = aws_s3_bucket.b1.id
 
   policy = jsonencode({
-    "Version": "2012-10-17",
-    "Id": "Policy1234567890123",
-    "Statement": [
-    	{
-      	"Sid": "Stmt1234567890123",
-        "Effect": "Allow",
-        "Principal": "*",
-        "Action": "s3:GetObject",
-        "Resource": [
-        	"arn:aws:s3:::${var.bucket_name}",
+    "Version" : "2012-10-17",
+    "Id" : "Policy1234567890123",
+    "Statement" : [
+      {
+        "Sid" : "Stmt1234567890123",
+        "Effect" : "Allow",
+        "Principal" : "*",
+        "Action" : "s3:GetObject",
+        "Resource" : [
+          "arn:aws:s3:::${var.bucket_name}",
           "arn:aws:s3:::${var.bucket_name}/*"
         ]
-    	}
+      }
     ]
   })
 }
