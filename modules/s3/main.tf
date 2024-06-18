@@ -1,45 +1,45 @@
 resource "aws_s3_bucket" "b1" {
-	#count = var.directory_bucket ? 0 : 1
-	bucket = var.bucket_name
-	#bucket_prefix = var.bucket_prefix  //for unique bucket_name
-	force_destroy = var.destroy_bucket
-	
-	tags = {
-		Name = var.bucket_tag_name
-	}
+  #count = var.directory_bucket ? 0 : 1
+  bucket = var.bucket_name
+  #bucket_prefix = var.bucket_prefix  //for unique bucket_name
+  force_destroy = var.destroy_bucket
+
+  tags = {
+    Name = var.bucket_tag_name
+  }
 }
 
 resource "aws_s3_object" "ob" {
-  bucket = aws_s3_bucket.b1.bucket
-  source = var.s3_object_path
-  key = var.object_name
-	content_type = var.as_website ? "text/html" : var.content_type
-	server_side_encryption = var.sse_type
+  bucket                 = aws_s3_bucket.b1.bucket
+  source                 = var.s3_object_path
+  key                    = var.object_name
+  content_type           = var.as_website ? "text/html" : var.content_type
+  server_side_encryption = var.sse_type
 }
 
 resource "aws_s3_bucket_public_access_block" "exam" {
-	bucket = aws_s3_bucket.b1.id
-	block_public_acls = var.s3_block_public_acls
-	block_public_policy = var.s3_block_public_policy
-	ignore_public_acls = var.ignore_public_acls
-	restrict_public_buckets = var.s3_restrict_public_buckets
+  bucket                  = aws_s3_bucket.b1.id
+  block_public_acls       = var.s3_block_public_acls
+  block_public_policy     = var.s3_block_public_policy
+  ignore_public_acls      = var.ignore_public_acls
+  restrict_public_buckets = var.s3_restrict_public_buckets
 }
 
 resource "aws_s3_bucket_versioning" "bv" {
-	bucket = aws_s3_bucket.b1.id
-	versioning_configuration {
-		status = var.enable_versioning
-	}
+  bucket = aws_s3_bucket.b1.id
+  versioning_configuration {
+    status = var.enable_versioning
+  }
 }
 
 resource "aws_s3_bucket_accelerate_configuration" "s1" {
-	count = var.accelerate ? 1 : 0
+  count  = var.accelerate ? 1 : 0
   bucket = aws_s3_bucket.b1.id
   status = "Enabled"
 }
 
 resource "aws_s3_bucket_ownership_controls" "s1" {
-	count = var.enable_acl ? 1 : 0
+  count  = var.enable_acl ? 1 : 0
   bucket = aws_s3_bucket.b1.id
   rule {
     object_ownership = var.ownership_type
@@ -51,22 +51,22 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Id = "MyBucketPolicy"
+    Id      = "MyBucketPolicy"
     Statement = [
       {
-        Sid = "ReadOnlyAccess"
-        Effect = "Allow"
+        Sid       = "ReadOnlyAccess"
+        Effect    = "Allow"
         Principal = "*"
-        Action = ["s3:PutObject" ,"s3:GetObject"]
+        Action    = ["s3:PutObject", "s3:GetObject"]
         /*Resource = [
           aws_s3_bucket.b1.arn,
           "${aws_s3_bucket.b1.arn}/*",
         ]
         */
         Resource = [
-					"arn:aws:s3:::${var.bucket_name}",
-					"arn:aws:s3:::${var.bucket_name}/*"
-				]
+          "arn:aws:s3:::${var.bucket_name}",
+          "arn:aws:s3:::${var.bucket_name}/*"
+        ]
       }
     ]
   })
