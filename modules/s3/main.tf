@@ -27,13 +27,21 @@ resource "aws_s3_bucket" "b1" {
   }
 }
 
+resource "aws_s3_directory_bucket" "db" {
+  count = var.directory_bucket ? 1 : 0
+  bucket = "${var.bucket_name}--${var.az_id}--x-s3"
+  location {
+    name = var.region
+  }
+  //Bucket name must be in the following format
+  //[bucket_name]--[azid]--x-s3
+}
+
 resource "aws_s3_object" "ob" {
   bucket = aws_s3_bucket.b1.bucket
   source = var.s3_object_path
-  //key                    = var.object_name
   key          = "${local.ct_value}-object"
   content_type = lookup(local.content_type, local.ct_value)
-  //content_type           = var.as_website ? "text/html" : var.content_type
   server_side_encryption = var.sse_type
 }
 
