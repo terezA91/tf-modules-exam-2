@@ -9,13 +9,9 @@ resource "aws_s3_bucket" "b1" {
   }
 }
 
-variable "ct" {
-	type = list(string)
-	default = split(".", var.object_name)
-}
-
 locals {
-	ct_vale = var.ct[1]
+	ct = split(".", var.object_name)
+	ct_vale = local.ct[1]
 }
 
 resource "aws_s3_object" "ob" {
