@@ -70,6 +70,19 @@ resource "aws_lambda_function" "tf-lambda-up" {
 	depends_on = [aws_cloudwatch_log_group.lf-loggroup]
 }
 
+resource "aws_s3_bucket_notification" "bn" {
+  count = var.enable_lf ? 1 : 0
+  bucket = var.bucket_id
+
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.tf-lambda-up.arn
+    //events = ["s3:ObjectCreated:*"]
+    events = [var.lambda_trigger_event]
+  }
+
+  depends_on = [aws_lambda_permission.alp]
+}
+
 resource "aws_lambda_permission" "alp" {
   statement_id = "AllowExecutionFromS3"
   action = "lambda:InvokeFunction"

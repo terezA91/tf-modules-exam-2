@@ -32,6 +32,13 @@ variable "bucket_arn" {
 	description = "Arn of s3 bucket"
 }
 
+variable "bucket_id" {}
+
+variable "lambda_trigger_event" {
+  default     = "s3:ObjectCreated:*"
+  description = "The event that triggers the lambda function"
+}
+
 variable "func_name" {
 	type = string
 	default = "lf-alp"
