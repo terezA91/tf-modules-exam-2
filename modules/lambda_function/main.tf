@@ -6,8 +6,11 @@ locals {
 	
 }
 
-output "val" {
-	value = path.module()
+resource "null_resource" "examplerr6" {
+  //count = length(data.aws_instances.test.ids)
+  provisioner "local-exec" {
+    command = "ls ${var.source_path} >> abc.txt"
+  }
 }
 
 resource "aws_iam_role" "for-lambda-t" {
@@ -29,9 +32,11 @@ resource "aws_iam_role" "for-lambda-t" {
 		Name = "Role for lambda"			
 	}
 }
+
 resource "aws_cloudwatch_log_group" "lf-loggroup" {
   name = "/aws/lambda/${aws_lambda_function.tf-lambda-up.function_name}"
 }
+
 data "aws_iam_policy_document" "policy-t" {
   statement {
     actions = [
@@ -45,11 +50,13 @@ data "aws_iam_policy_document" "policy-t" {
   }
 	//depends_on = [var.dependency_for_logstream]
 }
+
 resource "aws_iam_role_policy" "lambda_role_policy" {
   policy = data.aws_iam_policy_document.policy-t.json
   role   = aws_iam_role.for-lambda-t.id
   name   = "my-lambda-policy"
 }
+
 data "archive_file" "zip-of-content" {
   type = "zip"
   source_dir = var.source_path
