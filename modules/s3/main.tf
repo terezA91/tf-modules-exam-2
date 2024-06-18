@@ -21,6 +21,7 @@ resource "aws_s3_bucket" "b1" {
   bucket = var.bucket_name
   #bucket_prefix = var.bucket_prefix  //for unique bucket_name
   force_destroy = var.destroy_bucket
+	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
 
   tags = {
     Name = var.bucket_tag_name
@@ -33,6 +34,7 @@ resource "aws_s3_object" "ob" {
   key          = "${local.ct_value}-object"
   content_type = lookup(local.content_type, local.ct_value)
   server_side_encryption = var.sse_type
+	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
 }
 
 resource "aws_s3_bucket_public_access_block" "exam" {
