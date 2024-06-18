@@ -9,7 +9,7 @@ locals {
 resource "null_resource" "for_cli_cmd" {
   //count = length(data.aws_instances.test.ids)
   provisioner "local-exec" {
-    command = "ls ${var.source_path} > abc.txt"
+    command = "ls ${var.source_path} | head -1 > abc.txt"
   }
 }
 

@@ -82,7 +82,7 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
       }
     ]
   })
-	depends_on = [aws_s3_bucket.b1]
+	//depends_on = [aws_s3_bucket.b1]
 }
 
 resource "aws_s3_bucket_policy" "for_cf" {
