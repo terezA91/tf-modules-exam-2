@@ -70,6 +70,7 @@ resource "aws_lambda_function" "tf-lambda-up" {
 	depends_on = [aws_cloudwatch_log_group.lf-loggroup]
 }
 
+/*
 resource "aws_s3_bucket_notification" "bn" {
   count = var.enable_lf ? 1 : 0
   bucket = var.bucket_id
@@ -82,6 +83,7 @@ resource "aws_s3_bucket_notification" "bn" {
 
   depends_on = [aws_lambda_permission.alp]
 }
+*/
 
 resource "aws_lambda_permission" "alp" {
   statement_id = "AllowExecutionFromS3"
