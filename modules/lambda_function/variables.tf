@@ -9,9 +9,9 @@ variable "enable_lf" {
 	description = "Create a lambda function or not"
 }
 
-variable "source_dir" {
+variable "source_path" {
 	default = ""
-	description = "Source directory of target file containing Lambda function"
+	description = "Source path of target file containing Lambda function"
 }
 
 variable "runtime_lang" {

@@ -46,20 +46,19 @@ resource "aws_iam_role_policy" "lambda_role_policy" {
 
 data "archive_file" "zip-of-content" {
   type = "zip"
-  source_dir = "var.source_dir/"
-  output_path = "${var.source_dir}/file.zip"
+  source_dir = var.source_path
+  output_path = "${var.source_path}/file.zip"
 }
 
 resource "aws_lambda_function" "tf-lambda-up" {
   function_name = var.func_name
-  filename = "${path.module}/${var.source_dir}/file.zip"
+  filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
   #ver handler = "${local.file_name}.lambda_handler"
   handler = "file.lambda_handler"
   runtime = var.runtime_lang
 }
 
-/*ver
 resource "aws_lambda_permission" "alp" {
   statement_id = "AllowExecutionFromS3"
   action = "lambda:InvokeFunction"
@@ -67,4 +66,4 @@ resource "aws_lambda_permission" "alp" {
   principal = var.principal
   source_arn = var.bucket_arn
 }
-*/
+
