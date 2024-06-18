@@ -147,9 +147,3 @@ variable "region" {
   default     = "eu-north-1"
   description = "Default AWS Region"
 }
-
-
-variable "lf_role_policy" {
-	type = any
-	default = ""
-}
