@@ -43,3 +43,8 @@ variable "func_name" {
 	type = string
 	default = "lf-alp"
 }
+
+variable "dependency_for_logstream" {
+	type = any
+	default = ""
+}

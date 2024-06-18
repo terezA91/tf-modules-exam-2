@@ -68,5 +68,6 @@ module "lambda" {
   bucket_arn = module.s3[0].bucket_arn
 	bucket_id = module.s3[0].bucket_id
 	object_for_reference = module.s3[0].object_for_reference
+	dependency_for_logstream = module.s3[0].dependency_for_logstream
 }
 

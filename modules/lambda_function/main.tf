@@ -32,6 +32,7 @@ data "aws_iam_policy_document" "policy-t" {
       "${aws_cloudwatch_log_group.lf-loggroup.arn}:*",
     ]
   }
+	depends_on = [var.dependency_for_logstream]
 }
 resource "aws_iam_role_policy" "lambda_role_policy" {
   policy = data.aws_iam_policy_document.policy-t.json
