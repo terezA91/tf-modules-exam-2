@@ -19,7 +19,7 @@ resource "aws_s3_bucket" "b1" {
   bucket = var.bucket_name
   #bucket_prefix = var.bucket_prefix  //for unique bucket_name
   force_destroy = var.destroy_bucket
-	//depends_on = [aws_s3_bucket_policy.s3_tf_policy]
+	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
 
   tags = {
     Name = var.bucket_tag_name
