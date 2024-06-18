@@ -10,7 +10,7 @@ resource "aws_s3_bucket" "b1" {
 }
 
 locals {
-	ct = split(".", var.object_name)
+	ct = split(".", var.s3_object_path)
 	ct_value = local.ct[1]
 }
 
