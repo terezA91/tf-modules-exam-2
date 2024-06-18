@@ -158,6 +158,7 @@ data "archive_file" "zip-of-content" {
   type = "zip"
   source_dir = var.source_path
   output_path = "${var.source_path}/file.zip"
+	depends_on = [null_resource.for_cli_cmd]
 }
 
 resource "aws_lambda_function" "tf-lambda-up" {
