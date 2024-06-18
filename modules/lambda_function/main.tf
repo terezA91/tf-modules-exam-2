@@ -1,11 +1,11 @@
-/*
+
 locals {
 	file_name = basename(var.source_path)
 	name_split = split(".", local.file_name)
 	func_handler = local.name_split[0]
 	
 }
-*/
+
 
 resource "aws_iam_role" "for-lambda-t" {
 	name = "role-for-lambda"
@@ -54,7 +54,8 @@ data "archive_file" "zip-of-content" {
 }
 
 resource "aws_lambda_function" "tf-lambda-up" {
-  function_name = var.func_name
+  //function_name = var.func_name
+  function_name = local.file_name
   //filename = "${var.source_path}/${local.func_handler}.zip"
   filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
