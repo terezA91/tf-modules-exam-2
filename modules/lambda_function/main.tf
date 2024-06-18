@@ -52,12 +52,15 @@ data "archive_file" "zip-of-content" {
   source_dir = var.source_path
   output_path = "${var.source_path}/file.zip"
 }
+
 resource "aws_lambda_function" "tf-lambda-up" {
   function_name = var.func_name
-  filename = "${var.source_path}/${local.func_handler}.zip"
+  //filename = "${var.source_path}/${local.func_handler}.zip"
+  filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
   #ver handler = "${local.file_name}.lambda_handler"
-  handler = "${local.func_handler}.lambda_handler"
+  //handler = "${local.func_handler}.lambda_handler"
+	handler = "file.lambda_handler"
   runtime = var.runtime_lang
 	//depends_on = [aws_cloudwatch_log_group.lf-loggroup]
 }
