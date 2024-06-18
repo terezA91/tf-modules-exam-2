@@ -20,6 +20,12 @@ variable "runtime_lang" {
 	description = "Type and version of the runtime language"
 }
 
+variable "object_for_reference" {
+	type = any
+	default = ""
+	description = "s3_object_name for define dependency from lambda" 
+}
+
 variable "bucket_arn" {
 	type = string
 	default = ""

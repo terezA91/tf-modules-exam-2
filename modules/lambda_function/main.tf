@@ -57,6 +57,7 @@ resource "aws_lambda_function" "tf-lambda-up" {
   #ver handler = "${local.file_name}.lambda_handler"
   handler = "file.lambda_handler"
   runtime = var.runtime_lang
+	depends_on = [var.object_for_reference]
 }
 
 resource "aws_lambda_permission" "alp" {

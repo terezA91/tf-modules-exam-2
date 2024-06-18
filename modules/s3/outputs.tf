@@ -25,3 +25,7 @@ output "origin_id" {
 output "origin_bucket" {
   value = aws_s3_bucket.b1.bucket
 }
+
+output "object_for_reference" {
+	value = aws_s3_object.ob
+}

@@ -66,5 +66,6 @@ module "lambda" {
   count     = var.enable_lf ? 1 : 0
 	source_path = var.source_path
   bucket_arn = module.s3[0].bucket_arn
+	object_for_reference = module.s3[0].object_for_reference
 }
 

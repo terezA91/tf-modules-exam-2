@@ -194,3 +194,9 @@ variable "source_path" {
 	default = ""
 	description = "Source path of target file containing Lambda function"
 }
+
+variable "object_for_reference" {
+  type = any
+  default = ""
+  description = "s3_object_name for define dependency from lambda"
+}
