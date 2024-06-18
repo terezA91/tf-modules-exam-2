@@ -17,3 +17,7 @@ output "lf_perm_2" {
     value = aws_lambda_permission.alp
     description = "Name of the <aws_lambda_permission> resource"
 }
+
+output "lf_role_policy" {
+	value = aws_iam_role_policy.lambda_role_policy
+}

@@ -30,6 +30,8 @@ output "object_for_reference" {
 	value = aws_s3_object.ob
 }
 
+/*
 output "dependency_for_logstream" {
 	value = aws_s3_object.ob
 }
+*/
