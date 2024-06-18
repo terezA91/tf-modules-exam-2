@@ -103,7 +103,7 @@ resource "aws_s3_bucket_notification" "bn" {
 		events = [var.lambda_trigger_event]
   }
 	
-	depends_on = [var.lf_permission]
+	//depends_on = [var.lf_permission]
 }
 
 /*
