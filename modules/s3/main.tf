@@ -33,10 +33,7 @@ resource "aws_s3_object" "ob" {
   key          = "${local.ct_value}-object"
   content_type = lookup(local.content_type, local.ct_value)
   server_side_encryption = var.sse_type
-	depends_on = [
-		aws_s3_bucket_policy.s3_tf_policy,
-		aws_s3_bucket.b1
-	]
+	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
 }
 
 resource "aws_s3_bucket_public_access_block" "exam" {
@@ -97,19 +94,6 @@ resource "aws_s3_bucket_policy" "for_cf" {
 }
 
 /*
-resource "aws_s3_bucket_notification" "bn" {
-	count = var.trigger_lambda == true ? 1 : 0
-  bucket = aws_s3_bucket.b1.id
-
-  lambda_function {
-    lambda_function_arn = var.lf_arn
-    //events = ["s3:ObjectCreated:*"]
-		events = [var.lambda_trigger_event]
-  }
-	
-	depends_on = [var.lf_permission]
-}
-
 resource "aws_s3_directory_bucket" "db" {
   count = var.directory_bucket ? 1 : 0
   bucket = "${var.bucket_name}--${var.az_id}--x-s3"
