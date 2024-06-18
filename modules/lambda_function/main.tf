@@ -46,7 +46,7 @@ resource "aws_iam_role_policy" "lambda_role_policy" {
 
 data "archive_file" "zip-of-content" {
   type = "zip"
-  source_dir = var.source_path
+  source_file = var.source_path
   output_path = "${var.source_path}/file.zip"
 }
 
