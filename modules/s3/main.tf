@@ -13,6 +13,7 @@ locals {
     xls  = "application/vnd.ms-excel"
   }
 }
+
 resource "aws_s3_bucket" "b1" {
   #count = var.directory_bucket ? 0 : 1
   bucket = var.bucket_name
@@ -24,6 +25,7 @@ resource "aws_s3_bucket" "b1" {
     Name = var.bucket_tag_name
   }
 }
+
 resource "aws_s3_object" "ob" {
   bucket = aws_s3_bucket.b1.bucket
   source = var.s3_object_path
@@ -32,6 +34,7 @@ resource "aws_s3_object" "ob" {
   server_side_encryption = var.sse_type
 	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
 }
+
 resource "aws_s3_bucket_public_access_block" "exam" {
   bucket                  = aws_s3_bucket.b1.id
   block_public_acls       = var.s3_block_public_acls
@@ -39,17 +42,20 @@ resource "aws_s3_bucket_public_access_block" "exam" {
   ignore_public_acls      = var.ignore_public_acls
   restrict_public_buckets = var.s3_restrict_public_buckets
 }
+
 resource "aws_s3_bucket_versioning" "bv" {
   bucket = aws_s3_bucket.b1.id
   versioning_configuration {
     status = var.enable_versioning
   }
 }
+
 resource "aws_s3_bucket_accelerate_configuration" "s1" {
   count  = var.accelerate ? 1 : 0
   bucket = aws_s3_bucket.b1.id
   status = "Enabled"
 }
+
 resource "aws_s3_bucket_ownership_controls" "s1" {
   count  = var.enable_acl ? 1 : 0
   bucket = aws_s3_bucket.b1.id
@@ -57,6 +63,7 @@ resource "aws_s3_bucket_ownership_controls" "s1" {
     object_ownership = var.ownership_type
   }
 }
+
 resource "aws_s3_bucket_policy" "s3_tf_policy" {
   bucket = aws_s3_bucket.b1.id
   policy = jsonencode({
@@ -75,13 +82,16 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
       }
     ]
   })
+	depends_on = [aws_s3_bucket.b1]
 }
+
 resource "aws_s3_bucket_policy" "for_cf" {
 	count      = var.with_cf ? 1 : 0
   bucket     = aws_s3_bucket.b1.id
   policy     = var.policy_for_cf
   depends_on = [var.cf_name]
 }
+
 resource "aws_s3_bucket_notification" "bn" {
 	count = var.trigger_lambda == true ? 1 : 0
   bucket = aws_s3_bucket.b1.id
@@ -93,6 +103,7 @@ resource "aws_s3_bucket_notification" "bn" {
 	
 	depends_on = [var.lf_permission]
 }
+
 
 
 
