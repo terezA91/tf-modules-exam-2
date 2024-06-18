@@ -189,3 +189,8 @@ variable "region" {
   description = "Default AWS Region"
 }
 
+//>>>>>  lambda-function variables
+variable "source_path" {
+	default = ""
+	description = "Source path of target file containing Lambda function"
+}
