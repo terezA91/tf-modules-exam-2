@@ -92,6 +92,7 @@ resource "aws_s3_bucket_policy" "for_cf" {
   depends_on = [var.cf_name]
 }
 
+/*
 resource "aws_s3_bucket_notification" "bn" {
 	count = var.trigger_lambda == true ? 1 : 0
   bucket = aws_s3_bucket.b1.id
@@ -108,7 +109,7 @@ resource "aws_s3_bucket_notification" "bn" {
 
 
 
-/*
+
 locals {
   ob_name_split = split(".", var.s3_object_path)
   ct_value      = local.ob_name_split[1]

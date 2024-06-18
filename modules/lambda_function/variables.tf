@@ -32,7 +32,10 @@ variable "bucket_arn" {
 	description = "Arn of s3 bucket"
 }
 
-variable "bucket_id" {}
+variable "origin_id" {
+	type = any
+	default = ""
+}
 
 variable "lambda_trigger_event" {
   default     = "s3:ObjectCreated:*"

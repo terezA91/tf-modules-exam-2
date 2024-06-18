@@ -62,7 +62,17 @@ resource "aws_lambda_permission" "alp" {
   source_arn = var.bucket_arn
 }
 
+resource "aws_s3_bucket_notification" "bn" {
+  count = var.enable_lf ? 1 : 0
+  bucket = var.origin_id
+  lambda_function {
+    lambda_function_arn = aws_lambda_function.tf-lambda-up.arn
+    //events = ["s3:ObjectCreated:*"]
+    events = [var.lambda_trigger_event]
+  }
 
+  depends_on = [aws_lambda_permission.alp]
+}
 
 
 /*
