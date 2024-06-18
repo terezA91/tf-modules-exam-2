@@ -1,3 +1,4 @@
+/*
 locals {
   ob_name_split = split(".", var.s3_object_path)
   ct_value = local.ob_name_split[1]
@@ -15,7 +16,7 @@ locals {
 	}
 
 }
-
+*/
 
 resource "aws_s3_bucket" "b1" {
   #count = var.directory_bucket ? 0 : 1
@@ -32,8 +33,8 @@ resource "aws_s3_object" "ob" {
   bucket                 = aws_s3_bucket.b1.bucket
   source                 = var.s3_object_path
   key                    = local.ct_value
-	content_type           =" ${lookup(local.content_type, local.ct_value)}"
-  //content_type           = var.as_website ? "text/html" : var.content_type
+	//content_type           =" ${lookup(local.content_type, local.ct_value)}"
+  content_type           = var.as_website ? "text/html" : var.content_type
   server_side_encryption = var.sse_type
 }
 
