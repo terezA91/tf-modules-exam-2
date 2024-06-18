@@ -33,7 +33,10 @@ resource "aws_s3_object" "ob" {
   key          = "${local.ct_value}-object"
   content_type = lookup(local.content_type, local.ct_value)
   server_side_encryption = var.sse_type
-	//depends_on = [aws_s3_bucket_policy.s3_tf_policy]
+	depends_on = [
+		aws_s3_bucket_policy.s3_tf_policy,
+		aws_s3_bucket.b1
+	]
 }
 
 resource "aws_s3_bucket_public_access_block" "exam" {
@@ -103,7 +106,7 @@ resource "aws_s3_bucket_notification" "bn" {
 		events = [var.lambda_trigger_event]
   }
 	
-	//depends_on = [var.lf_permission]
+	depends_on = [var.lf_permission]
 }
 
 /*
