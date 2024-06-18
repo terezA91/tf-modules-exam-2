@@ -40,8 +40,8 @@ module "s3" {
 
   # >>>Lambda portion
   trigger_lambda = var.trigger_lambda
-  lf_arn         = var.trigger_lambda ? module.lambda[0].lf_arn : var.lf_arn
-  lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : var.lf_permission
+  lf_arn         = var.trigger_lambda ? module.lambda[0].lf_arn
+  lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission
   # >>>CloudFront portion
   cf_name       = var.with_cf ? module.cloudfront[0].cf_name : ""
   policy_for_cf = var.with_cf ? module.cloudfront[0].policy_for_cf : ""
