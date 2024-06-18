@@ -27,16 +27,6 @@ resource "aws_s3_bucket" "b1" {
   }
 }
 
-resource "aws_s3_directory_bucket" "db" {
-  count = var.directory_bucket ? 1 : 0
-  bucket = "${var.bucket_name}--${var.az_id}--x-s3"
-  location {
-    name = var.region
-  }
-  //Bucket name must be in the following format
-  //[bucket_name]--[azid]--x-s3
-}
-
 resource "aws_s3_object" "ob" {
   bucket = aws_s3_bucket.b1.bucket
   source = var.s3_object_path
