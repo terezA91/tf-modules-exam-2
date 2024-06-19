@@ -1,3 +1,5 @@
+variable "path" {}
+
 variable "principal" {
 	type = string
 	default = "s3.amazonaws.com"
