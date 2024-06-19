@@ -63,6 +63,13 @@ resource "aws_s3_bucket_ownership_controls" "s1" {
   }
 }
 
+resource "null_resource" "wait_after_creating_policy" {
+	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
+  provisioner "local-exec" {
+    command = "sleep 1m"
+  }
+}
+
 resource "aws_s3_bucket_policy" "s3_tf_policy" {
   bucket = aws_s3_bucket.b1.id
   policy = jsonencode({
