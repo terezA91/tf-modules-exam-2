@@ -51,7 +51,7 @@ data "aws_iam_policy_document" "for_cloudwatch" {
 resource "aws_iam_role_policy" "lambda_role_policy" {
   policy = data.aws_iam_policy_document.for_cloudwatch.json
   role   = aws_iam_role.for_lambda.id
-  name   = "For access to Cloudwatch"
+  name   = "For-access-to-Cloudwatch"
 }
 
 data "archive_file" "zip_of_content" {
