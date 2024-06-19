@@ -155,6 +155,7 @@ variable "trigger_lambda" {
 
 variable "lf_arn" {
   type        = any
+	default = ""
   description = "Arn of lambda function"
 }
 
