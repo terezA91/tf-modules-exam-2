@@ -42,8 +42,8 @@ module "s3" {
   lf_arn         = var.trigger_lambda ? module.lambda[0].lf_arn : null
   lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : null
   # >>>CloudFront portion
-  cf_name       = var.with_cf ? module.cloudfront[0].cf_name : ""
-  policy_for_cf = var.with_cf ? module.cloudfront[0].policy_for_cf : ""
+  cf_name       = var.with_cf ? module.cloudfront[0].cf_name : null
+  policy_for_cf = var.with_cf ? module.cloudfront[0].policy_for_cf : null
 }
 
 module "cloudfront" {
