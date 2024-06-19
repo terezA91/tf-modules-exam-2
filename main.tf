@@ -66,9 +66,7 @@ module "lambda" {
   count     = var.enable_lf ? 1 : 0
 	path = var.path
 	source_path = var.source_path
-  bucket_arn = module.s3[0].bucket_arn
+  source_arn = module.s3[0].bucket_arn
 	origin_id = module.s3[0].origin_id
-	object_for_reference = module.s3[0].object_for_reference
-	//dependency_for_logstream = module.s3[0].dependency_for_logstream
 }
 
