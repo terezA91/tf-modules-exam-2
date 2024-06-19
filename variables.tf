@@ -198,11 +198,13 @@ variable "runtime_lang" {
 }
 
 variable "source_arn" {
+	default = ""
   description = "Arn of Lambda origin"
 }
 
 variable "origin_id" {
   type = any
+	default = ""
 }
 
 variable "lambda_trigger_event" {
@@ -238,14 +240,17 @@ variable "sign_protocol" {
 }
 
 variable "origin_name" {
+	default = ""
   description = "Bucket-name for referencing from cf"
 }
 
 variable "origin_domain_name" {
+	default = ""
   description = "Origin domain-name of origin source"
 }
 
 variable "cf_origin_id" {
+	default = ""
   description = "Origin-id of origin source resource"
 }
 
@@ -302,5 +307,6 @@ variable "cache_pid" {
 }
 
 variable "origin_arn" {
+	default = ""
   description = "Arn value of the s3 bucket"
 }
