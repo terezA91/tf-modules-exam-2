@@ -62,7 +62,7 @@ data "archive_file" "zip-of-content" {
 }
 
 resource "aws_lambda_function" "tf-lambda-up" {
-  function_name = local.func_name
+  function_name = "lf-alp"
   filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
 	handler = "${local.func_name}.lambda_handler"
