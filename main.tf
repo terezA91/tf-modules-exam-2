@@ -53,7 +53,7 @@ module "cloudfront" {
   count              = var.enable_cloudfront ? 1 : 0
   origin_name        = module.s3[0].s3_bucket_name
   origin_domain_name = module.s3[0].domain_name
-  origin_id          = module.s3[0].origin_id
+  cf_origin_id          = module.s3[0].origin_id
   origin_arn         = module.s3[0].bucket_arn
 }
 
