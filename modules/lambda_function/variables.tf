@@ -1,3 +1,11 @@
+variable "content"{
+	default = ""
+}
+
+variable "temp_file" {
+	default = "temp_file"
+}
+
 variable "principal" {
 	type = string
 	default = "s3.amazonaws.com"

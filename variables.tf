@@ -190,6 +190,10 @@ variable "region" {
 }
 
 //>>>>>  lambda-function variables
+variable "content" {
+	default = ""
+}
+
 variable "source_path" {
 	default = ""
 	description = "Source path of target file containing Lambda function"

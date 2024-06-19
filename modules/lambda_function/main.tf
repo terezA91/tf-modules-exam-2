@@ -3,13 +3,15 @@ locals {
 	file_name = basename(var.source_path)
 	name_split = split(".", local.file_name)
 	func_handler = local.name_split[0]
+	content = file(var.temp_file)
+	content_split = split(".", local.content)
 	
 }
 
 resource "null_resource" "for_cli_cmd" {
   //count = length(data.aws_instances.test.ids)
   provisioner "local-exec" {
-    command = "ls ${var.source_path} | head -1 > abc.txt"
+    command = "ls ${var.source_path} | head -1 > ${var.temp_file}"
   }
 }
 
@@ -66,7 +68,8 @@ data "archive_file" "zip-of-content" {
 
 resource "aws_lambda_function" "tf-lambda-up" {
   //function_name = var.func_name
-  function_name = local.file_name
+  //function_name = local.file_name
+  function_name = local.content_split
   //filename = "${var.source_path}/${local.func_handler}.zip"
   filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
