@@ -1,16 +1,11 @@
-
 locals {
-	file_name = basename(var.source_path)
-	name_split = split(".", local.file_name)
-	func_handler = local.name_split[0]
 	content = file(var.path)
 	content_split = split(".", local.content)
-	f_name = local.content_split[0]
+	func_name = local.content_split[0]
 	
 }
 
 resource "null_resource" "for_cli_cmd" {
-  //count = length(data.aws_instances.test.ids)
   provisioner "local-exec" {
     command = "ls ${var.source_path} | head -1 > ${var.path}"
   }
@@ -51,7 +46,6 @@ data "aws_iam_policy_document" "policy-t" {
       "${aws_cloudwatch_log_group.lf-loggroup.arn}:*",
     ]
   }
-	//depends_on = [var.dependency_for_logstream]
 }
 
 resource "aws_iam_role_policy" "lambda_role_policy" {
@@ -68,17 +62,11 @@ data "archive_file" "zip-of-content" {
 }
 
 resource "aws_lambda_function" "tf-lambda-up" {
-  //function_name = var.func_name
-  //function_name = local.file_name
-  function_name = local.f_name
-  //filename = "${var.source_path}/${local.func_handler}.zip"
+  function_name = local.func_name
   filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
-  #ver handler = "${local.file_name}.lambda_handler"
-  //handler = "${local.func_handler}.lambda_handler"
-	handler = "file.lambda_handler"
+	handler = "${local.func_name}.lambda_handler"
   runtime = var.runtime_lang
-	//depends_on = [aws_cloudwatch_log_group.lf-loggroup]
 }
 
 resource "aws_lambda_permission" "alp" {
@@ -94,7 +82,6 @@ resource "aws_s3_bucket_notification" "bn" {
   bucket = var.origin_id
   lambda_function {
     lambda_function_arn = aws_lambda_function.tf-lambda-up.arn
-    //events = ["s3:ObjectCreated:*"]
     events = [var.lambda_trigger_event]
   }
 
