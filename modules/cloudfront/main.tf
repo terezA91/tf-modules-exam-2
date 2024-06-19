@@ -28,7 +28,7 @@ resource "aws_cloudfront_distribution" "cf" {
     cached_methods         = ["GET", "HEAD"]
     cache_policy_id        = var.cache_pid
     target_origin_id       = var.cf_origin_id
-    viewer_protocol_policy = var.viewer.protocol
+    viewer_protocol_policy = var.viewer_protocol
     /*
     This is alternative of the argument <cache_policy_id>
 		forwarded_values {
