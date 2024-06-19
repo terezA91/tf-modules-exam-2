@@ -64,6 +64,7 @@ module "lambda" {
 
   enable_lf = var.enable_lf
   count     = var.enable_lf ? 1 : 0
+	path = var.path
 	source_path = var.source_path
   bucket_arn = module.s3[0].bucket_arn
 	origin_id = module.s3[0].origin_id

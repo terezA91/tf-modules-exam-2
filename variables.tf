@@ -190,7 +190,7 @@ variable "region" {
 }
 
 //>>>>>  lambda-function variables
-variable "content" {
+variable "path" {
 	default = ""
 }
 

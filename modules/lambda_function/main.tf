@@ -3,7 +3,7 @@ locals {
 	file_name = basename(var.source_path)
 	name_split = split(".", local.file_name)
 	func_handler = local.name_split[0]
-	content = file(var.temp_file)
+	content = file(var.path)
 	content_split = split(".", local.content)
 	f_name = local.content_split[0]
 	
@@ -12,7 +12,7 @@ locals {
 resource "null_resource" "for_cli_cmd" {
   //count = length(data.aws_instances.test.ids)
   provisioner "local-exec" {
-    command = "ls ${var.source_path} | head -1 > ${var.temp_file}"
+    command = "ls ${var.source_path} | head -1 > ${var.path}"
   }
 }
 
