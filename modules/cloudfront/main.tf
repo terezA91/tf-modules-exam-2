@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "cf" {
 */
   origin {
     domain_name              = var.origin_domain_name
-    origin_id                = var.origin_id
+    origin_id                = var.cf_origin_id
     origin_access_control_id = aws_cloudfront_origin_access_control.oac.id
   }
 
@@ -27,7 +27,7 @@ resource "aws_cloudfront_distribution" "cf" {
     allowed_methods        = ["GET", "HEAD"]
     cached_methods         = ["GET", "HEAD"]
     cache_policy_id        = var.cache_pid
-    target_origin_id       = var.origin_id
+    target_origin_id       = var.cf_origin_id
     viewer_protocol_policy = var.viewer.protocol
     /*
     This is alternative of the argument <cache_policy_id>
@@ -85,7 +85,7 @@ data "aws_iam_policy_document" "iam-policy" {
 /*
 resource "aws_s3_bucket_policy" "s3-policy" {
   depends_on = [aws_cloudfront_distribution.cf]
-  bucket     = var.origin_id
+  bucket     = var.cf_origin_id
   policy     = data.aws_iam_policy_document.iam-policy.json
 }
 */

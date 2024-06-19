@@ -161,11 +161,6 @@ variable "lf_arn" {
   description = "Arn of lambda function"
 }
 
-variable "lambda_trigger_event" {
-  default     = "s3:ObjectCreated:*"
-  description = "The event that triggers the lambda function"
-}
-
 //The actual value will be set when creating the module for s3
 variable "lf_permission" {
   type        = any
@@ -185,7 +180,7 @@ variable "region" {
 
 //>>>>>  Lambda-Function variables
 variable "path" {
-	default = ""
+  default = ""
 }
 
 variable "principal" {
@@ -193,7 +188,7 @@ variable "principal" {
 }
 
 variable "source_path" {
-	default = ""
+  default     = ""
   description = "Source path of target file containing Lambda function"
 }
 
@@ -250,7 +245,7 @@ variable "origin_domain_name" {
   description = "Origin domain-name of origin source"
 }
 
-variable "origin_id" {
+variable "cf_origin_id" {
   description = "Origin-id of origin source resource"
 }
 

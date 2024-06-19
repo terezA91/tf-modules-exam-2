@@ -33,7 +33,7 @@ variable "origin_domain_name" {
   description = "Origin domain-name of origin source"
 }
 
-variable "origin_id" {
+variable "cf_origin_id" {
   description = "Origin-id of origin source resource"
 }
 
