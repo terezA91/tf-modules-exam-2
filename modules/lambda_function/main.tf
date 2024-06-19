@@ -5,6 +5,7 @@ locals {
 	func_handler = local.name_split[0]
 	content = file(var.temp_file)
 	content_split = split(".", local.content)
+	f_name = local.content_split[0]
 	
 }
 
@@ -69,7 +70,7 @@ data "archive_file" "zip-of-content" {
 resource "aws_lambda_function" "tf-lambda-up" {
   //function_name = var.func_name
   //function_name = local.file_name
-  function_name = local.content_split
+  function_name = local.f_name
   //filename = "${var.source_path}/${local.func_handler}.zip"
   filename = "${var.source_path}/file.zip"
   role = aws_iam_role.for-lambda-t.arn
