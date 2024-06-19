@@ -32,7 +32,7 @@ resource "aws_iam_role" "for_lambda" {
 }
 
 resource "aws_cloudwatch_log_group" "lf_loggroup" {
-  name = "/aws/lambda/${aws_lambda_function.tf-lambda-up.function_name}"
+  name = "/aws/lambda/${aws_lambda_function.tf_lambda.function_name}"
 }
 
 data "aws_iam_policy_document" "for_cloudwatch" {
@@ -64,7 +64,7 @@ data "archive_file" "zip_of_content" {
 resource "aws_lambda_function" "tf_lambda" {
   function_name = "lf-alp"
   filename = "${var.source_path}/file.zip"
-  role = aws_iam_role.for-lambda-t.arn
+  role = aws_iam_role.for_lambda.arn
 	handler = "${local.func_name}.lambda_handler"
   runtime = var.runtime_lang
 }
