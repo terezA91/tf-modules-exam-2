@@ -36,13 +36,10 @@ module "s3" {
   count          = var.enable_s3 ? 1 : 0
   bucket_name    = var.bucket_name
   s3_object_path = var.s3_object_path
-  content_type   = var.content_type
 
   # >>>Lambda portion
   trigger_lambda = var.trigger_lambda
-  //lf_arn         = var.trigger_lambda ? module.lambda[0].lf_arn : module.lambda[0].lf_arn_2
   lf_arn = var.trigger_lambda ? module.lambda[0].lf_arn : null
-  //lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : module.lambda[0].lf_perm_2
   lf_permission = var.trigger_lambda ? module.lambda[0].lf_permission : null
   # >>>CloudFront portion
   cf_name       = var.with_cf ? module.cloudfront[0].cf_name : ""

@@ -83,10 +83,6 @@ variable "as_website" {
   description = "Create a bucket as a website(default) or as a storage"
 }
 
-variable "content_type" {
-  description = "Definition of bucket content_type"
-}
-
 variable "sse_type" {
   default     = "AES256"
   description = "Type of Server-side-encryption in s3"
