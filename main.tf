@@ -41,9 +41,9 @@ module "s3" {
   # >>>Lambda portion
   trigger_lambda = var.trigger_lambda
   //lf_arn         = var.trigger_lambda ? module.lambda[0].lf_arn : module.lambda[0].lf_arn_2
-  lf_arn         = var.trigger_lambda ? module.lambda[0].lf_arn : null
+  lf_arn = var.trigger_lambda ? module.lambda[0].lf_arn : null
   //lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : module.lambda[0].lf_perm_2
-  lf_permission  = var.trigger_lambda ? module.lambda[0].lf_permission : null
+  lf_permission = var.trigger_lambda ? module.lambda[0].lf_permission : null
   # >>>CloudFront portion
   cf_name       = var.with_cf ? module.cloudfront[0].cf_name : ""
   policy_for_cf = var.with_cf ? module.cloudfront[0].policy_for_cf : ""
@@ -62,13 +62,13 @@ module "cloudfront" {
 
 
 module "lambda" {
-  source    = "./modules/lambda_function"
+  source = "./modules/lambda_function"
 
-  enable_lf = var.enable_lf
-  count     = var.enable_lf ? 1 : 0
-	path = var.path
-	source_path = var.source_path
-  source_arn = module.s3[0].bucket_arn
-	origin_id = module.s3[0].origin_id
+  enable_lf   = var.enable_lf
+  count       = var.enable_lf ? 1 : 0
+  path        = var.path
+  source_path = var.source_path
+  source_arn  = module.s3[0].bucket_arn
+  origin_id   = module.s3[0].origin_id
 }
 

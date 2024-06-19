@@ -26,12 +26,12 @@ resource "aws_s3_bucket" "b1" {
 }
 
 resource "aws_s3_object" "ob" {
-  bucket = aws_s3_bucket.b1.bucket
-  source = var.s3_object_path
-  key          = "${local.ct_value}-object"
-  content_type = lookup(local.content_type, local.ct_value)
+  bucket                 = aws_s3_bucket.b1.bucket
+  source                 = var.s3_object_path
+  key                    = "${local.ct_value}-object"
+  content_type           = lookup(local.content_type, local.ct_value)
   server_side_encryption = var.sse_type
-	depends_on = [aws_s3_bucket.b1]
+  depends_on             = [aws_s3_bucket.b1]
 }
 
 resource "aws_s3_bucket_public_access_block" "exam" {
@@ -64,9 +64,9 @@ resource "aws_s3_bucket_ownership_controls" "s1" {
 }
 
 resource "null_resource" "wait_after_creating_policy" {
-	depends_on = [aws_s3_bucket_policy.s3_tf_policy]
+  depends_on = [aws_s3_bucket_policy.s3_tf_policy]
   provisioner "local-exec" {
-    command = "sleep 1m"
+    command = "sleep 30"
   }
 }
 
@@ -88,11 +88,11 @@ resource "aws_s3_bucket_policy" "s3_tf_policy" {
       }
     ]
   })
-	//depends_on = [aws_s3_bucket.b1]
+  //depends_on = [aws_s3_bucket.b1]
 }
 
 resource "aws_s3_bucket_policy" "for_cf" {
-	count      = var.with_cf ? 1 : 0
+  count      = var.with_cf ? 1 : 0
   bucket     = aws_s3_bucket.b1.id
   policy     = var.policy_for_cf
   depends_on = [var.cf_name]

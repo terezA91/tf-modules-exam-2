@@ -69,7 +69,6 @@ variable "bucket_tag_name" {
 }
 
 variable "s3_object_path" {
-  default     = ""
   description = "Source path of s3 bucket object"
 }
 
@@ -85,7 +84,6 @@ variable "as_website" {
 }
 
 variable "content_type" {
-  default     = ""
   description = "Definition of bucket content_type"
 }
 
@@ -145,13 +143,11 @@ variable "with_cf" {
 
 variable "policy_for_cf" {
   type        = any
-  default     = ""
   description = "s3 bucket policy for cloudfront"
 }
 
 variable "cf_name" {
   type        = any
-  default     = ""
   description = "Name of the <aws_cloudfront_distribution> resource"
 }
 
@@ -163,7 +159,6 @@ variable "trigger_lambda" {
 
 variable "lf_arn" {
   type        = any
-  default     = ""
   description = "Arn of lambda function"
 }
 
@@ -175,7 +170,6 @@ variable "lambda_trigger_event" {
 //The actual value will be set when creating the module for s3
 variable "lf_permission" {
   type        = any
-  default     = ""
   description = "For referencing <aws_lambda_permission> resource"
 }
 
@@ -191,11 +185,9 @@ variable "region" {
 
 //>>>>>  lambda-function variables
 variable "path" {
-	default = ""
 }
 
 variable "source_path" {
-	default = ""
-	description = "Source path of target file containing Lambda function"
+  description = "Source path of target file containing Lambda function"
 }
 

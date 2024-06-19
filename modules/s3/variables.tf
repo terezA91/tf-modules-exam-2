@@ -32,7 +32,6 @@ variable "bucket_tag_name" {
 }
 
 variable "s3_object_path" {
-  default     = ""
   description = "Source path of s3 bucket object"
 }
 
@@ -48,7 +47,6 @@ variable "as_website" {
 }
 
 variable "content_type" {
-  default     = ""
   description = "Definition of bucket content_type"
 }
 
