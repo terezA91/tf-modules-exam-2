@@ -66,14 +66,17 @@ variable "ec2_pub_sub_a" {
 }
 
 variable "ec2_pub_sub_b" {
+  default     = ""
   description = "Id of the public subnet(in <b> zone)"
 }
 
 variable "ec2_priv_sub_a" {
+  default     = ""
   description = "Id of the private subnet(in <a> zone)"
 }
 
 variable "ec2_priv_sub_b" {
+  default     = ""
   description = "Id of the private subnet(in <b> zone)"
 }
 
