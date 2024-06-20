@@ -8,7 +8,7 @@ module "app_lb" {
   source = "./modules/load_balancer"
 
   enable_elb    = var.enable_elb
-  count         = var.enable_alb ? 1 : 0
+  count         = var.enable_elb ? 1 : 0
   vpc           = module.vpc[0].vpc_id
   elb_pub_sub_a = module.vpc[0].pub_sub_a_id
   elb_pub_sub_b = module.vpc[0].pub_sub_b_id
