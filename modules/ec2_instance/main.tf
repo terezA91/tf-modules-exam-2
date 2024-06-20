@@ -1,11 +1,11 @@
 locals {
 	pub_subnets = [
-		var.ec2_pub_sub_a
+		var.ec2_pub_sub_a,
 		var.ec2_pub_sub_b
 	]
 
 	priv_subnets = [
-		var.ec2_priv_sub_a
+		var.ec2_priv_sub_a,
 		var.ec2_priv_sub_b
 	]
 }
