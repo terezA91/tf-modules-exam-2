@@ -12,32 +12,32 @@ variable "credential_path" {
 //Enable specific service-modules
 variable "enable_elb" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "enable_cloudfront" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "enable_autoscaling" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "enable_s3" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "enable_lf" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "enable_vpc" {
   type    = bool
-  //default = false
+  default = false
 }
 
 //>>>>>  s3 module variables

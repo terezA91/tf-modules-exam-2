@@ -2,7 +2,7 @@
 
 variable "enable_autoscaling" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "min_size" {
@@ -93,19 +93,19 @@ variable "lt_userdata" {
 
 variable "disable_api_stop" {
   type        = bool
-  //default     = false
+  default     = false
   description = "Enable <Instance Stop Protection>"
 }
 
 variable "disable_termination" {
   type        = bool
-  //default     = false
+  default     = false
   description = "Enable <Instance Termination Protection"
 }
 
 variable "update_lt_version" {
   type        = bool
-  //default     = false
+  default     = false
   description = "Update default version of lt each update or not"
 }
 
@@ -127,21 +127,15 @@ variable "delete_net_interface" {
 
 variable "enable_hibernation" {
   type        = bool
-  //default     = false
+  default     = false
   description = "Enable hibernation of instances or not"
 }
 
 variable "enable_monitoring" {
   type        = bool
-  //default     = false
+  default     = false
   description = "Enable monitoring for instances or not"
 }
-
-/*
-variable "user_data" {
-  description = "Path of user_data script"
-}
-*/
 
 variable "lt_name_tag" {
   default = "Custom-launch-template"
@@ -166,12 +160,6 @@ variable "ami_virtualization_type" {
   default = "hvm"
 }
 
-/*
-variable "vpc_id" {
-	type = any
-}
-*/
-
 variable "key_algorithm" {
   type        = string
   description = "Key_algorithm(rsa, ecdsa or ed25519)"
@@ -195,7 +183,7 @@ variable "key_file" {
 
 variable "enable_cpu_out_alarm" {
   type    = bool
-  //default = false //dv-?
+  default = false //dv-?
 }
 
 variable "out_policy_name" {
@@ -256,7 +244,7 @@ variable "up_threshold" {
 
 variable "enable_cpu_in_alarm" {
   type    = bool
-  //default = false //dv-?
+  default = false //dv-?
 }
 
 variable "in_policy_name" {

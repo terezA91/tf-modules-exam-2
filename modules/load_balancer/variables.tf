@@ -1,6 +1,6 @@
 variable "enable_elb" {
   type    = bool
-  //default = false
+  default = false
 }
 
 variable "elb_name" {
