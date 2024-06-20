@@ -10,7 +10,7 @@ variable "credential_path" {
 }
 
 //Enable specific service-modules
-variable "enable_alb" {
+variable "enable_elb" {
   type    = bool
   default = false
 }
