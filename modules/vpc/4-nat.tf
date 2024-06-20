@@ -1,4 +1,3 @@
-/*
 resource "aws_eip" "eip" {
   vpc = true
 
@@ -16,4 +15,3 @@ resource "aws_nat_gateway" "ngw" {
     Name = var.nat_gw_tag
   }
 }
-*/
