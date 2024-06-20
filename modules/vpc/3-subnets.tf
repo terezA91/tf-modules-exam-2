@@ -24,8 +24,8 @@ resource "aws_subnet" "pub-sub-b" {
 
 
 resource "aws_subnet" "priv-sub-a" {
-  vpc_id = aws_vpc.vpc.id
-  cidr_block = var.priv_sub_cidr[0]
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.priv_sub_cidr[0]
   availability_zone = var.az[0]
 
   tags = {
@@ -34,8 +34,8 @@ resource "aws_subnet" "priv-sub-a" {
 }
 
 resource "aws_subnet" "priv-sub-b" {
-  vpc_id = aws_vpc.vpc.id
-  cidr_block = var.priv_sub_cidr[1]
+  vpc_id            = aws_vpc.vpc.id
+  cidr_block        = var.priv_sub_cidr[1]
   availability_zone = var.az[1]
 
   tags = {
