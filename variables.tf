@@ -367,7 +367,6 @@ variable "ec2_pub_sub_a" {
   default = ""
 }
 
-/*
 variable "ec2_pub_sub_b" {
   default = ""
 }
@@ -379,7 +378,6 @@ variable "ec2_priv_sub_a" {
 variable "ec2_priv_sub_b" {
   default = ""
 }
-*/
 
 variable "sec_group_id" {
   default = ""
@@ -389,3 +387,6 @@ variable "user_data" {
   default = ""
 }
 
+variable "user_data_2" {
+  default = ""
+}

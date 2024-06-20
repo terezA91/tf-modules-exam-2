@@ -86,6 +86,12 @@ variable "sec_group_id" {
 
 variable "user_data" {}
 
+variable "user_data_2" {}
+
 variable "instance_tag" {
   default = "Custom EC2"
+}
+
+variable "priv_instance_tag" {
+  default = "Custom EC2 in private"
 }

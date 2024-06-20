@@ -75,6 +75,10 @@ module "ec2_instance" {
   enable_ec2    = var.enable_ec2
   count         = var.enable_ec2 ? 1 : 0
   ec2_pub_sub_a = module.vpc[0].pub_sub_a_id
+  ec2_pub_sub_b = module.vpc[0].pub_sub_b_id
+  ec2_priv_sub_a = module.vpc[0].priv_sub_a_id
+  ec2_priv_sub_b = module.vpc[0].priv_sub_b_id
   sec_group_id  = module.vpc[0].sec_group_id
   user_data     = var.user_data
+  user_data_2   = var.user_data_2
 }
