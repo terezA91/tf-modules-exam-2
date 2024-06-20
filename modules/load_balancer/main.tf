@@ -1,7 +1,7 @@
 #AWS ELB config
 resource "aws_elb" "alb" {
   name            = var.elb_name
-  subnets         = [var.pub_sub_a, var.pub_sub_b]
+  subnets         = [var.elb_pub_sub_a, var.elb_pub_sub_b]
   security_groups = [aws_security_group.alb_sg.id]
 
   listener {
