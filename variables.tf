@@ -319,40 +319,40 @@ variable "lt_userdata" {
 
 variable "instance_sec_group" {
   type    = any
-  default = ""
+  default = null
 }
 
 variable "elb" {
   type    = any
-  default = ""
+  default = null
 }
 
 variable "pub_sub_a" {
   type        = any
-  default     = ""
+  default     = null
   description = "Id of first Public Subnet"
 }
 
 variable "pub_sub_b" {
   type        = any
-  default     = ""
+  default     = null
   description = "Id of second Public Subnet"
 }
 
 //>>>>>  Load Balancer module variables
 variable "elb_pub_sub_a" {
   type        = any
-  default     = ""
+  default     = null
   description = "Id of first Public Subnet"
 }
 
 variable "elb_pub_sub_b" {
   type        = any
-  default     = ""
+  default     = null
   description = "Id of second Public Subnet"
 }
 
 variable "vpc" {
   type    = any
-  default = ""
+  default = null
 }
