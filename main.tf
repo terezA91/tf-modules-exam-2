@@ -10,8 +10,8 @@ module "app_lb" {
   enable_alb = var.enable_alb
   count      = var.enable_alb ? 1 : 0
   vpc        = module.vpc[0].vpc_id
-  pub_sub_a  = module.vpc[0].pub_sub_a_id
-  pub_sub_b  = module.vpc[0].pub_sub_b_id
+  elb_pub_sub_a  = module.vpc[0].pub_sub_a_id
+  elb_pub_sub_b  = module.vpc[0].pub_sub_b_id
 }
 
 module "autoscaling_group" {

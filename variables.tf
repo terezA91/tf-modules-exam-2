@@ -340,13 +340,13 @@ variable "pub_sub_b" {
 }
 
 //>>>>>  Load Balancer module variables
-variable "pub_sub_a" {
+variable "elb_pub_sub_a" {
   type        = any
   default     = ""
   description = "Id of first Public Subnet"
 }
 
-variable "pub_sub_b" {
+variable "elb_pub_sub_b" {
   type        = any
   default     = ""
   description = "Id of second Public Subnet"
