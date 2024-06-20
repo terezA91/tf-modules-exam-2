@@ -12,8 +12,6 @@ module "app_lb" {
   vpc        = module.vpc[0].vpc_id
   pub_sub_a  = module.vpc[0].pub_sub_a_id
   pub_sub_b  = module.vpc[0].pub_sub_b_id
-  //priv_sub_a_id = module.vpc[0].priv_sub_a_id
-  //priv_sub_b_id = module.vpc[0].priv_sub_b_id
 }
 
 module "autoscaling_group" {
@@ -24,6 +22,7 @@ module "autoscaling_group" {
   pub_sub_a          = module.vpc[0].pub_sub_a_id
   pub_sub_b          = module.vpc[0].pub_sub_b_id
   elb                = module.app_lb[0].elb
+  lt_userdata        = var.lt_userdata
   instance_sec_group = module.app_lb[0].instance_sec_group
 }
 
@@ -53,7 +52,7 @@ module "cloudfront" {
   count              = var.enable_cloudfront ? 1 : 0
   origin_name        = module.s3[0].s3_bucket_name
   origin_domain_name = module.s3[0].domain_name
-  cf_origin_id          = module.s3[0].origin_id
+  cf_origin_id       = module.s3[0].origin_id
   origin_arn         = module.s3[0].bucket_arn
 }
 

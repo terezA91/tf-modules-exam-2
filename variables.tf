@@ -198,13 +198,13 @@ variable "runtime_lang" {
 }
 
 variable "source_arn" {
-	default = ""
+  default     = ""
   description = "Arn of Lambda origin"
 }
 
 variable "origin_id" {
-  type = any
-	default = ""
+  type    = any
+  default = ""
 }
 
 variable "lambda_trigger_event" {
@@ -240,17 +240,17 @@ variable "sign_protocol" {
 }
 
 variable "origin_name" {
-	default = ""
+  default     = ""
   description = "Bucket-name for referencing from cf"
 }
 
 variable "origin_domain_name" {
-	default = ""
+  default     = ""
   description = "Origin domain-name of origin source"
 }
 
 variable "cf_origin_id" {
-	default = ""
+  default     = ""
   description = "Origin-id of origin source resource"
 }
 
@@ -307,6 +307,52 @@ variable "cache_pid" {
 }
 
 variable "origin_arn" {
-	default = ""
+  default     = ""
   description = "Arn value of the s3 bucket"
+}
+
+//>>>>>  Autoscaling Group variables
+variable "lt_userdata" {
+  default     = ""
+  description = "Path of user_data for launch template"
+}
+
+variable "instance_sec_group" {
+  type    = any
+  default = ""
+}
+
+variable "elb" {
+  type    = any
+  default = ""
+}
+
+variable "pub_sub_a" {
+  type        = any
+  default     = ""
+  description = "Id of first Public Subnet"
+}
+
+variable "pub_sub_b" {
+  type        = any
+  default     = ""
+  description = "Id of second Public Subnet"
+}
+
+//>>>>>  Load Balancer module variables
+variable "pub_sub_a" {
+  type        = any
+  default     = ""
+  description = "Id of first Public Subnet"
+}
+
+variable "pub_sub_b" {
+  type        = any
+  default     = ""
+  description = "Id of second Public Subnet"
+}
+
+variable "vpc" {
+  type    = any
+  default = ""
 }

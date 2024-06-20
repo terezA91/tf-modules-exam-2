@@ -1,79 +1,79 @@
 #AWS ELB config
 resource "aws_elb" "alb" {
-  name = "Custom-alb"
-  subnets = [var.pub_sub_a, var.pub_sub_b]
+  name            = var.elb_name
+  subnets         = [var.pub_sub_a, var.pub_sub_b]
   security_groups = [aws_security_group.alb_sg.id]
 
   listener {
-    instance_port = 80
-    instance_protocol = "http"
-    lb_port = 80
-    lb_protocol = "http"
+    instance_port     = var.listener_port
+    instance_protocol = var.listener_protocol
+    lb_port           = var.listener_port
+    lb_protocol       = var.listener_protocol
   }
 
   health_check {
-    healthy_threshold = 2
-    unhealthy_threshold = 2
-    timeout = 3
-    target = "HTTP:80/"
-    interval = 30
+    healthy_threshold   = var.healthy_threshold
+    unhealthy_threshold = var.unhealthy_threshold
+    timeout             = var.check_timeout
+    target              = var.check_target
+    interval            = var.check_interval
   }
 
-  cross_zone_load_balancing = true
-  connection_draining = true
-  connection_draining_timeout = 400
+  cross_zone_load_balancing   = var.cross_zone
+  connection_draining         = var.connection_draining
+  connection_draining_timeout = var.draining_timeout
 
   tags = {
-    Name = "Custom-alb"
+    Name = var.elb_name_tag
   }
 }
 
 #security group for AWS ELB
 resource "aws_security_group" "alb_sg" {
-	name = "ELB-SecurityGroup"
-  description = "Security group for ELB"
-  vpc_id = var.vpc
+  name        = var.elb_sg_name
+  description = var.elb_sg_desc
+  vpc_id      = var.vpc
 
   ingress {
-    from_port = 80
-    to_port = 80
-    protocol = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    from_port   = var.elb_sg_ingress_from
+    to_port     = var.elb_sg_ingress_to
+    protocol    = var.elb_sg_ingress_protocol
+    cidr_blocks = [var.elb_sg_ingress_cidr]
   }
 
-	egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name = "Custom-ELB-SecurityGroup"
+    Name = var.elb_sg_name_tag
   }
 }
 
 #security group for instances
 resource "aws_security_group" "instance_sg" {
-	name = "Instance-SecurityGroup"
-  description = "Security group for Instances"
-  vpc_id = var.vpc
+  name        = var.instance_sg_name
+  description = var.instance_sg_desc
+  vpc_id      = var.vpc
 
   ingress {
-    from_port = 22
-    to_port = 80
-    protocol = "tcp"
+    from_port       = var.instance_sg_ingress_from
+    to_port         = var.instance_sg_ingress_to
+    protocol        = var.instance_sg_ingress_protocol
     security_groups = [aws_security_group.alb_sg.id]
   }
 
-	egress {
-    from_port = 0
-    to_port = 0
-    protocol = "-1"
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
   tags = {
-    Name = "Custom-Instance-SecurityGroup"
+    Name = var.instance_sg_name_tag
   }
 }

@@ -1,63 +1,126 @@
-variable "enable_alb" {
-	type = bool
-	default = false  //dv -?
-	description = "Initialize <load_balancer> module"
-}
-
-variable "vpc" { type = any }
-
-variable "ami_most_recent" {
-	type = bool
-	default = true
-}
-
-variable "ami_name" {
-  type = any
-  default = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
-}
-
-variable "ami_virtualization_type" {
-  default = "hvm"
-}
-
-variable "key_algorithm" {
-  type        = string
-  description = "Key_algorithm(rsa, ecdsa or ed25519)"
-  default     = "RSA"
-}
-
-variable "rsa_bits" {
-  description = "Length of key with rsa_algorithm(2048,4096)"
-  default     = 2048
-}
-
-variable "key_name" {
-  default = "priv-key"
-  description = "Name of instance key"
-}
-
-variable "key_file" {
-  default = "key.pem"
-  description = "File for storing private key"
+variable "elb_name" {
+  default = "Custom-alb"
 }
 
 variable "pub_sub_a" {
-  type = any
+  type        = any
   description = "Id of first Public Subnet"
 }
 
 variable "pub_sub_b" {
-  type = any
+  type        = any
   description = "Id of second Public Subnet"
 }
-/*
-variable "priv_sub_a" {
-  type = any
-  description = "Id of first Private Subnet"
+
+variable "listener_port" {
+  type    = number
+  default = 80
 }
 
-variable "priv_sub_b" {
-  type = any
-  description = "Id of second Private Subnet"
+variable "listener_protocol" {
+  default = "http"
 }
-*/
+
+variable "healthy_threshold" {
+  type    = number
+  default = 2
+}
+
+variable "unhealthy_threshold" {
+  type    = number
+  default = 2
+}
+
+variable "check_timeout" {
+  type    = number
+  default = 3
+}
+
+variable "check_target" {
+  default = "HTTP:80/"
+}
+
+variable "check_interval" {
+  type    = number
+  default = 30
+}
+
+variable "cross_zone" {
+  type    = bool
+  default = true
+}
+
+variable "connection_draining" {
+  type    = bool
+  default = true
+}
+
+variable "draining_timeout" {
+  type    = number
+  default = 400
+}
+
+variable "elb_name_tag" {
+  default = "Custom-alb"
+}
+
+variable "elb_sg_name" {
+  default = "ELB-SecurityGroup"
+}
+
+variable "elb_sg_desc" {
+  default = "Security group for ELB"
+}
+
+variable "vpc" {
+  type = any
+}
+
+variable "elb_sg_ingress_from" {
+  type    = number
+  default = 80
+}
+
+variable "elb_sg_ingress_to" {
+  type    = number
+  default = 80
+}
+
+variable "elb_sg_ingress_protocol" {
+  default = "tcp"
+}
+
+variable "elb_sg_ingress_cidr" {
+  default = "0.0.0.0/0"
+}
+
+variable "elb_sg_name_tag" {
+  default = "Custom-ELB-SecurityGroup"
+}
+
+variable "instance_sg_name" {
+  default = "Instance-SecurityGroup"
+}
+
+variable "instance_sg_desc" {
+  default = "Security group for Instances"
+}
+
+variable "instance_sg_ingress_from" {
+  type    = number
+  default = 22
+}
+
+variable "instance_sg_ingress_to" {
+  type    = number
+  default = 80
+}
+
+variable "instance_sg_ingress_protocol" {
+  default = "tcp"
+}
+
+variable "instance_sg_name_tag" {
+  default = "Custom-Instance-SecurityGroup"
+}
+
