@@ -8,7 +8,7 @@ resource "aws_security_group" "tf-sg" {
     from_port   = var.sg_ingress_1_port
     to_port     = var.sg_ingress_1_port
     protocol    = var.sg_ingress_protocol
-    cidr_blocks = [var.default_dateway]
+    cidr_blocks = [var.default_gateway]
   }
 
   ingress {
