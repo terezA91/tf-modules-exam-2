@@ -1,5 +1,6 @@
 module "vpc" {
-  source     = "./modules/vpc"
+  source = "./modules/vpc"
+
   enable_vpc = var.enable_vpc
   count      = var.enable_vpc ? 1 : 0
 }
@@ -68,3 +69,12 @@ module "lambda" {
   origin_id   = module.s3[0].origin_id
 }
 
+module "ec2_instance" {
+  source = "./modules/ec2_instance"
+
+  enable_ec2    = var.enable_ec2
+  count         = var.enable_ec2 ? 1 : 0
+  ec2_pub_sub_a = module.vpc[0].pub_sub_a_id
+  sec_group_id  = module.vpc[0].sec_group_id
+  user_data     = var.user_data
+}

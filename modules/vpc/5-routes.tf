@@ -1,14 +1,14 @@
 resource "aws_route_table" "public" {
-	vpc_id = aws_vpc.vpc.id
+  vpc_id = aws_vpc.vpc.id
 
-	route {
-		cidr_block = var.default_gateway
-		gateway_id = aws_internet_gateway.igw.id
-	}
+  route {
+    cidr_block = var.default_gateway
+    gateway_id = aws_internet_gateway.igw.id
+  }
 
-	tags = {
-		Name = "Route table for public"
-	}
+  tags = {
+    Name = var.route_table_pub
+  }
 }
 
 /*
@@ -21,18 +21,18 @@ resource "aws_route_table" "private" {
   }
 
   tags = {
-    Name = "Route table for private"
+    Name = var.route_table_priv
   }
 }
 */
 
 resource "aws_route_table_association" "public-a" {
-	subnet_id = aws_subnet.pub-sub-a.id
-	route_table_id = aws_route_table.public.id
+  subnet_id      = aws_subnet.pub-sub-a.id
+  route_table_id = aws_route_table.public.id
 }
 
 resource "aws_route_table_association" "public-b" {
-  subnet_id = aws_subnet.pub-sub-b.id
+  subnet_id      = aws_subnet.pub-sub-b.id
   route_table_id = aws_route_table.public.id
 }
 

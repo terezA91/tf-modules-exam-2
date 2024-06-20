@@ -35,6 +35,11 @@ variable "enable_lf" {
   default = false
 }
 
+variable "enable_ec2" {
+  type    = bool
+  default = false
+}
+
 variable "enable_vpc" {
   type    = bool
   default = false
@@ -356,3 +361,29 @@ variable "vpc" {
   type    = any
   default = null
 }
+
+//>>>>>  EC2_instance module variables
+variable "ec2_pub_sub_a" {
+  default = ""
+}
+
+variable "ec2_pub_sub_b" {
+  default = ""
+}
+
+variable "ec2_priv_sub_a" {
+  default = ""
+}
+
+variable "ec2_priv_sub_b" {
+  default = ""
+}
+
+variable "sec_group_id" {
+  default = ""
+}
+
+variable "user_data" {
+  default = ""
+}
+

@@ -3,7 +3,7 @@ resource "aws_eip" "eip" {
   vpc = true
 
   tags = {
-    Name = "My elastic_ip"
+    Name = var.eip_tag
   }
 }
 
@@ -13,7 +13,7 @@ resource "aws_nat_gateway" "ngw" {
   depends_on = [aws_internet_gateway.igw]
 
   tags = {
-    Name = "My NAT Gateway"
+    Name = var.nat_gw_tag
   }
 }
 */
