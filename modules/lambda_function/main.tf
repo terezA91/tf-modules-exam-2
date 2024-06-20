@@ -12,13 +12,13 @@ resource "null_resource" "for_cli_cmd" {
 }
 
 resource "aws_iam_role" "for_lambda" {
-  name = "role-for-lambda"
+  name = var.iam_role_name
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
-        Sid    = "IamRoleForLambda"
-        Effect = "Allow"
+        Sid    = var.iam_role_sid
+        Effect = var.iam_role_effect
         Action = "sts:AssumeRole"
         Principal = {
           Service = "lambda.amazonaws.com"
@@ -27,7 +27,7 @@ resource "aws_iam_role" "for_lambda" {
     ]
   })
   tags = {
-    Name = "Custom Lambda role"
+    Name = var.iam_role_tag
   }
 }
 
@@ -51,18 +51,18 @@ data "aws_iam_policy_document" "for_cloudwatch" {
 resource "aws_iam_role_policy" "lambda_role_policy" {
   policy = data.aws_iam_policy_document.for_cloudwatch.json
   role   = aws_iam_role.for_lambda.id
-  name   = "For-access-to-Cloudwatch"
+  name   = var.iam_role_policy_name
 }
 
 data "archive_file" "zip_of_content" {
-  type        = "zip"
+  type        = var.archive_type
   source_dir  = var.source_path
   output_path = "${var.source_path}/file.zip"
   depends_on  = [null_resource.for_cli_cmd]
 }
 
 resource "aws_lambda_function" "tf_lambda" {
-  function_name = "lf-alp"
+  function_name = var.function_name
   filename      = "${var.source_path}/file.zip"
   role          = aws_iam_role.for_lambda.arn
   handler       = "${local.func_name}.lambda_handler"
@@ -71,7 +71,7 @@ resource "aws_lambda_function" "tf_lambda" {
 
 resource "aws_lambda_permission" "alp" {
   statement_id  = "AllowExecutionFromS3"
-  action        = "lambda:InvokeFunction"
+  action        = var.lambda_permission_action
   function_name = aws_lambda_function.tf_lambda.arn
   principal     = var.principal
   source_arn    = var.source_arn

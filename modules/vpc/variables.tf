@@ -1,10 +1,3 @@
-#Vpc variables
-
-variable "enable_vpc" {
-  type    = bool
-  default = false
-}
-
 variable "vpc_cidr" {
   default     = "10.0.0.0/16"
   description = "Cidr_block value of Vpc"

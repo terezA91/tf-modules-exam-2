@@ -4,19 +4,45 @@ variable "principal" {
   default = "s3.amazonaws.com"
 }
 
-variable "enable_lf" {
-  type        = bool
-  default     = false
-  description = "Create a lambda function or not"
-}
-
 variable "source_path" {
   description = "Source path of target file containing Lambda function"
+}
+
+variable "iam_role_name" {
+  default = "role-for-lambda"
+}
+
+variable "iam_role_sid" {
+  default = "IamRoleForLambda"
+}
+
+variable "iam_role_effect" {
+  default = "Allow"
+}
+
+variable "iam_role_tag" {
+  default = "Custom Lambda role"
+}
+
+variable "iam_role_policy_name" {
+  default = "For-access-to-Cloudwatch"
+}
+
+variable "archive_type" {
+  default = "zip"
+}
+
+variable "function_name" {
+  default = "lf-alp"
 }
 
 variable "runtime_lang" {
   default     = "python3.8"
   description = "Type and version of the runtime language"
+}
+
+variable "lambda_permission_action" {
+  default = "lambda:InvokeFunction"
 }
 
 variable "source_arn" {

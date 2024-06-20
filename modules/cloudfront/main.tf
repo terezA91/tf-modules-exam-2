@@ -7,12 +7,6 @@ resource "aws_cloudfront_origin_access_control" "oac" {
 }
 
 resource "aws_cloudfront_distribution" "cf" {
-  /*
-  depends_on = [
-    var.origin_name,
-    aws_cloudfront_origin_access_control.oac
-  ]
-*/
   origin {
     domain_name              = var.origin_domain_name
     origin_id                = var.cf_origin_id
@@ -53,12 +47,6 @@ resource "aws_cloudfront_distribution" "cf" {
 }
 
 data "aws_iam_policy_document" "iam-policy" {
-  /*
-  depends_on = [
-    var.s3_bucket_name,
-    aws_cloudfront_distribution.cf
-  ]
-*/
   statement {
     sid    = var.iam_policy_sid
     effect = var.policy_effect
@@ -82,10 +70,3 @@ data "aws_iam_policy_document" "iam-policy" {
   }
 }
 
-/*
-resource "aws_s3_bucket_policy" "s3-policy" {
-  depends_on = [aws_cloudfront_distribution.cf]
-  bucket     = var.cf_origin_id
-  policy     = data.aws_iam_policy_document.iam-policy.json
-}
-*/

@@ -1,15 +1,3 @@
-variable "enable_s3" {
-  type        = bool
-  default     = true
-  description = "initialize s3 module or not"
-}
-
-variable "directory_bucket" {
-  type        = bool
-  default     = false //Creating <General purpose bucket>
-  description = "Create bucket of type <General purpose> or <directory>"
-}
-
 variable "bucket_name" {
   description = "Name of the s3 bucket"
   default     = "bucket-alp"

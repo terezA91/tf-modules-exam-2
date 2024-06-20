@@ -1,4 +1,3 @@
-#AWS ELB config
 resource "aws_elb" "alb" {
   name            = var.elb_name
   subnets         = [var.elb_pub_sub_a, var.elb_pub_sub_b]
@@ -28,7 +27,6 @@ resource "aws_elb" "alb" {
   }
 }
 
-#security group for AWS ELB
 resource "aws_security_group" "alb_sg" {
   name        = var.elb_sg_name
   description = var.elb_sg_desc
@@ -53,7 +51,6 @@ resource "aws_security_group" "alb_sg" {
   }
 }
 
-#security group for instances
 resource "aws_security_group" "instance_sg" {
   name        = var.instance_sg_name
   description = var.instance_sg_desc

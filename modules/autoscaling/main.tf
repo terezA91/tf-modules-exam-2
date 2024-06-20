@@ -1,14 +1,13 @@
 resource "aws_autoscaling_group" "asg" {
-  name                      = "Custom-AutoScalingGroup"
+  name                      = var.asg_name
   min_size                  = var.min_size
   max_size                  = var.max_size
   desired_capacity          = var.desired_capacity
   health_check_type         = var.health_check_type
   force_delete              = var.asg_force_delete
   health_check_grace_period = var.grace_period
-  //load_balancers = [aws_elb.custom-elb.name]
-  load_balancers      = [var.elb]
-  vpc_zone_identifier = [var.pub_sub_a, var.pub_sub_b]
+  load_balancers            = [var.elb]
+  vpc_zone_identifier       = [var.pub_sub_a, var.pub_sub_b]
 
   launch_template {
     id      = aws_launch_template.lt.id
@@ -29,14 +28,13 @@ resource "aws_autoscaling_group" "asg" {
 
 resource "aws_launch_template" "lt" {
   name          = var.lt_name
-  image_id      = data.aws_ami.custom_ami.id
+  image_id      = var.ami_id
   instance_type = var.instance_type
-  key_name      = aws_key_pair.key.key_name
-  //user_data =	filebase64("${path.module}/file.sh")
-  user_data = filebase64(var.lt_userdata)
+  key_name      = var.with_ssh ? aws_key_pair.key.key_name : null
+  user_data     = filebase64(var.lt_userdata)
 
-  disable_api_stop        = var.disable_api_stop    //dv
-  disable_api_termination = var.disable_termination //dv
+  disable_api_stop        = var.disable_api_stop
+  disable_api_termination = var.disable_termination
   update_default_version  = var.update_lt_version
 
   network_interfaces {
@@ -63,40 +61,6 @@ resource "aws_launch_template" "lt" {
   }
 }
 
-#AMI definition
-data "aws_ami" "custom_ami" {
-  owners      = [var.ami_owner]
-  most_recent = var.ami_most_recent
-  /*
-	filter {
-		name = "name"
-		values = [var.ami_source]
-	}
-
-	filter {
-		name = "virtualization-type"
-		values = [var.ami_virtualization_type]
-	}
-*/
-}
-
-//The following 3 resources are intended for key generation(and store)
-resource "tls_private_key" "key_gen" {
-  algorithm = var.key_algorithm
-  rsa_bits  = var.rsa_bits
-}
-
-resource "aws_key_pair" "key" {
-  key_name   = var.key_name
-  public_key = tls_private_key.key_gen.public_key_openssh
-}
-
-resource "local_file" "key_file" {
-  content  = tls_private_key.key_gen.private_key_pem
-  filename = var.key_file
-}
-
-#define autoscaling configuration policy
 resource "aws_autoscaling_policy" "scaleout_policy" {
   count                  = var.enable_cpu_out_alarm ? 1 : 0
   name                   = var.out_policy_name
@@ -107,7 +71,6 @@ resource "aws_autoscaling_policy" "scaleout_policy" {
   policy_type            = var.out_policy_type
 }
 
-#define cloud watch monitoring
 resource "aws_cloudwatch_metric_alarm" "cpu_alarm_scaleup" {
   count               = var.enable_cpu_out_alarm ? 1 : 0
   alarm_name          = var.up_alarm_name
@@ -127,7 +90,6 @@ resource "aws_cloudwatch_metric_alarm" "cpu_alarm_scaleup" {
   alarm_actions   = [aws_autoscaling_policy.scaleout_policy[0].arn]
 }
 
-#define auto descaling policy
 resource "aws_autoscaling_policy" "scalein_policy" {
   count                  = var.enable_cpu_in_alarm ? 1 : 0
   name                   = var.in_policy_name
@@ -138,7 +100,6 @@ resource "aws_autoscaling_policy" "scalein_policy" {
   policy_type            = var.in_policy_type
 }
 
-#define descaling cloud watch
 resource "aws_cloudwatch_metric_alarm" "cpu-alarm-scaledown" {
   count               = var.enable_cpu_in_alarm ? 1 : 0
   alarm_name          = var.down_alarm_name
@@ -156,4 +117,20 @@ resource "aws_cloudwatch_metric_alarm" "cpu-alarm-scaledown" {
 
   actions_enabled = true
   alarm_actions   = [aws_autoscaling_policy.scalein_policy[0].arn]
+}
+
+//The following 3 resources are intended for key generation(and store)
+resource "tls_private_key" "key_gen" {
+  algorithm = var.key_algorithm
+  rsa_bits  = var.rsa_bits
+}
+
+resource "aws_key_pair" "key" {
+  key_name   = var.key_name
+  public_key = tls_private_key.key_gen.public_key_openssh
+}
+
+resource "local_file" "key_file" {
+  content  = tls_private_key.key_gen.private_key_pem
+  filename = var.key_file
 }

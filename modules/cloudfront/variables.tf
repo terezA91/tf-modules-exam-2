@@ -1,9 +1,3 @@
-variable "enable_cloudfront" {
-  type        = bool
-  default     = false
-  description = "Initialize Cloudfront module or not"
-}
-
 variable "oac_name" {
   default     = "My-OAC"
   description = "Name of <origin access control>"

@@ -1,8 +1,7 @@
 //Default type of variables is <string>
 
-variable "enable_autoscaling" {
-  type    = bool
-  default = false
+variable "asg_name" {
+  default = "Custom-AutoScalingGroup"
 }
 
 variable "min_size" {
@@ -82,9 +81,18 @@ variable "lt_name" {
   description = "Name of the launch_template"
 }
 
+variable "ami_id" {
+  default = "ami-0c1aa4c741fbb30d5"
+}
+
 variable "instance_type" {
   default     = "t3.micro"
   description = "instance_type of AWS EC2"
+}
+
+variable "with_ssh" {
+  type    = bool
+  default = true
 }
 
 variable "lt_userdata" {
@@ -139,46 +147,6 @@ variable "enable_monitoring" {
 
 variable "lt_name_tag" {
   default = "Custom-launch-template"
-}
-
-variable "ami_owner" {
-  default     = "637423489195"
-  description = "Account_id of ami owner"
-}
-
-variable "ami_most_recent" {
-  type    = bool
-  default = true
-}
-
-variable "ami_source" {
-  type    = any
-  default = "637423489195/my_ami"
-}
-
-variable "ami_virtualization_type" {
-  default = "hvm"
-}
-
-variable "key_algorithm" {
-  type        = string
-  description = "Key_algorithm(rsa, ecdsa or ed25519)"
-  default     = "RSA"
-}
-
-variable "rsa_bits" {
-  description = "Length of key with rsa_algorithm(2048,4096)"
-  default     = 2048
-}
-
-variable "key_name" {
-  default     = "priv-key"
-  description = "Name of instance key"
-}
-
-variable "key_file" {
-  default     = "key.pem"
-  description = "File for storing private key"
 }
 
 variable "enable_cpu_out_alarm" {
@@ -289,4 +257,25 @@ variable "down_metric_name" {
 variable "down_threshold" {
   type    = number
   default = 10
+}
+
+variable "key_algorithm" {
+  type        = string
+  description = "Key_algorithm(rsa, ecdsa or ed25519)"
+  default     = "RSA"
+}
+
+variable "rsa_bits" {
+  description = "Length of key with rsa_algorithm(2048,4096)"
+  default     = 2048
+}
+
+variable "key_name" {
+  default     = "priv-key"
+  description = "Name of instance key"
+}
+
+variable "key_file" {
+  default     = "key.pem"
+  description = "File for storing private key"
 }

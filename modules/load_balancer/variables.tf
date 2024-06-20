@@ -1,8 +1,3 @@
-variable "enable_elb" {
-  type    = bool
-  default = false
-}
-
 variable "elb_name" {
   default = "Custom-alb"
 }
